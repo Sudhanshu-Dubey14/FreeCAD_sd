@@ -1,5 +1,5 @@
 # ***************************************************************************
-# *   Copyright (c) 2019 Bernd Hahnebach <bernd@bimstatik.org>              *
+# *   Copyright (c) 2019 Sudhanshu Dubey <sudhanshu.thethunder@gmail.com>   *
 # *                                                                         *
 # *   This program is free software; you can redistribute it and/or modify  *
 # *   it under the terms of the GNU Lesser General Public License (LGPL)    *
@@ -20,8 +20,8 @@
 # ***************************************************************************
 
 
-__title__ = "OOFEM Tasks"
-__author__ = "Bernd Hahnebach"
+__title__ = "FELT Tasks"
+__author__ = "Sudhanshu Dubey"
 __url__ = "http://www.freecadweb.org"
 
 
@@ -54,7 +54,7 @@ class Prepare(run.Prepare):
         global _inputFileName
         self.pushStatus("Preparing input files...\n")
         c = _Container(self.analysis)
-        w = writer.FemInputWriterOOFEM(
+        w = writer.FemInputWriterFELT(
             self.analysis,
             self.solver,
             c.mesh,
@@ -77,12 +77,12 @@ class Prepare(run.Prepare):
             c.fluid_sections,
             self.directory
         )
-        path = w.write_OOFEM_input_file()
+        path = w.write_FELT_input_file()
         # report to user if task succeeded
         if path is not None:
             self.pushStatus("Write completed!")
         else:
-            self.pushStatus("Writing OOFEM input files failed!")
+            self.pushStatus("Writing FELT input files failed!")
         _inputFileName = os.path.splitext(os.path.basename(path))[0]
 
 
@@ -91,13 +91,13 @@ class Solve(run.Solve):
     def run(self):
         if not _inputFileName:
             # TODO do not run solver, do not try to read results in a smarter way than an Exception
-            raise Exception('Error on writing OOFEM input file.\n')
+            raise Exception('Error on writing FELT input file.\n')
         infile = _inputFileName + '.in'
-        FreeCAD.Console.PrintError('OOFEM-info: infile: {} \n\n'.format(infile))
+        FreeCAD.Console.PrintError('FELT-info: infile: {} \n\n'.format(infile))
 
         self.pushStatus("Executing solver...\n")
-        binary = settings.get_binary("oofem")
-        # binary = '/usr/bin/oofem'  # if something goes wrong the binary path could be set for debugging
+        binary = settings.get_binary("felt")
+        # binary = '/usr/bin/felt'  # if something goes wrong the binary path could be set for debugging
         self._process = subprocess.Popen(
             [binary, "-f", infile],
             cwd=self.directory,
@@ -117,14 +117,14 @@ class Results(run.Results):
     def run(self):
         if not _inputFileName:
             # TODO do not run solver, do not try to read results in a smarter way than an Exception
-            raise Exception('Error on writing OOFEM input file.\n')
-        self.load_results_oofem()
+            raise Exception('Error on writing FELT input file.\n')
+        self.load_results_felt()
 
-    def load_results_oofem(self):
-        res_file = os.path.join(self.directory, "2DPlaneStress.out.m0.1.vtu")
-        FreeCAD.Console.PrintError('OOFEM-info: refile: ' + res_file + ' \n')
+    def load_results_felt(self):
+        res_file = os.path.join(self.directory, "1Dbeam.out")
+        FreeCAD.Console.PrintError('FELT-info: refile: ' + res_file + ' \n')
         if os.path.isfile(res_file):
-            result_name_prefix = 'OOFEM_' + "2DPlaneStress"
+            result_name_prefix = 'FELT_' + "1Dbeam"
             from feminout.importVTKResults import importVtkVtkResult as importVTU
             resobj = importVTU(res_file, result_name_prefix)
             if FreeCAD.GuiUp:
@@ -149,16 +149,16 @@ class _Container(object):
         # ****************************************************************************************
         # ATM no member are collected, to test the solver:
         # start FreeCAD, make a new document
-        # add an analysis, add a oofem solver and run the solver
+        # add an analysis, add a felt solver and run the solver
         # the dummy inputfile which is a string at end of writer module is written to
-        # the file 2DPlaneStress.in
+        # the file 1Dbeam.in
         # results will be loaded
         # ****************************************************************************************
 
         # get mesh
         self.mesh = None
 
-        # get member, empty lists are not supported by oofem
+        # get member, empty lists are not supported by felt
         self.materials_linear = []
         self.materials_nonlinear = []
 
