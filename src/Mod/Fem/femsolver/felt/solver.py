@@ -1,5 +1,5 @@
 # ***************************************************************************
-# *   Copyright (c) 2019 Bernd Hahnebach <bernd@bimstatik.org>              *
+# *   Copyright (c) 2019 Sudhanshu Dubey <bernd@bimstatik.org>              *
 # *                                                                         *
 # *   This program is free software; you can redistribute it and/or modify  *
 # *   it under the terms of the GNU Lesser General Public License (LGPL)    *
@@ -19,11 +19,11 @@
 # *                                                                         *
 # ***************************************************************************
 
-__title__ = "OOFEM SolverObject"
-__author__ = "Bernd Hahnebach"
+__title__ = "FELT SolverObject"
+__author__ = "Sudhanshu Dubey"
 __url__ = "http://www.freecadweb.org"
 
-## @package SolverOOFEM
+## @package SolverFELT
 #  \ingroup FEM
 
 import os
@@ -43,7 +43,7 @@ if FreeCAD.GuiUp:
 ANALYSIS_TYPES = ["static"]
 
 
-def create(doc, name="SolverOOFEM"):
+def create(doc, name="SolverFELT"):
     return FemUtils.createObject(
         doc, name, Proxy, ViewProxy)
 
@@ -52,7 +52,7 @@ class Proxy(solverbase.Proxy):
     """The Fem::FemSolver's Proxy python type, add solver specific properties
     """
 
-    Type = "Fem::FemSolverObjectOofem"
+    Type = "Fem::FemSolverObjectFElt"
 
     def __init__(self, obj):
         super(Proxy, self).__init__(obj)
@@ -76,8 +76,8 @@ class Proxy(solverbase.Proxy):
     def edit(self, directory):
         pattern = os.path.join(directory, "*.in")
         print(pattern)
-        print('Edit of OOFEM input files inside FreeCAD not yet supported!')
-        # TODO implement editing of OOFEEM input files inside FreeCAD
+        print('Edit of FELT input files inside FreeCAD not yet supported!')
+        # TODO implement editing of FELT input files inside FreeCAD
         f = glob.glob(pattern)[0]
         FemGui.open(f)
 
