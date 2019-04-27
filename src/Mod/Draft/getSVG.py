@@ -1,4 +1,6 @@
-import FreeCAD, math, sys, os, DraftVecUtils, WorkingPlane
+import six
+
+import FreeCAD, math, os, DraftVecUtils, WorkingPlane
 import Part, DraftGeomUtils
 from FreeCAD import Vector
 from Draft import getType, getrgb, svgpatterns, gui
@@ -66,7 +68,7 @@ def getPattern(pat):
     return ''
 
 
-def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direction=None,linestyle=None,color=None,linespacing=None,techdraw=False,rotation=0):
+def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direction=None,linestyle=None,color=None,linespacing=None,techdraw=False,rotation=0,fillSpaces=False):
     '''getSVG(object,[scale], [linewidth],[fontsize],[fillstyle],[direction],[linestyle],[color],[linespacing]):
     returns a string containing a SVG representation of the given object,
     with the given linewidth and fontsize (used if the given object contains
@@ -175,11 +177,10 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
                             elif len(e.Vertexes) == 1 and isellipse:
                                 #svg = getEllipse(e)
                                 #return svg
-                                endpoints = (getProj(c.value((c.LastParameter-\
-                                        c.FirstParameter)/2.0), plane), \
-                                        getProj(vs[-1].Point, plane))
+                                endpoints = [getProj(c.value((c.LastParameter-c.FirstParameter)/2.0), plane),
+                                             getProj(vs[-1].Point, plane)]
                             else:
-                                endpoints = (getProj(vs[-1].Point), plane)
+                                endpoints = [getProj(vs[-1].Point, plane)]
                             # arc
                             if iscircle:
                                 rx = ry = c.Radius
@@ -390,7 +391,7 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
             svg = ""
             for i in range(len(text)):
                 t = text[i]
-                if sys.version_info.major < 3 and (not isinstance(t,unicode)):
+                if six.PY2 and not isinstance(t, six.text_type):
                     t = t.decode("utf8")
                 # possible workaround if UTF8 is unsupported
                 #    import unicodedata
@@ -731,6 +732,19 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
             if not obj.ViewObject:
                 print ("export of spaces to SVG is only available in GUI mode")
             else:
+                if fillSpaces:
+                    if hasattr(obj,"Proxy"):
+                        if not hasattr(obj.Proxy,"face"):
+                            obj.Proxy.getArea(obj,notouch=True)
+                        if hasattr(obj.Proxy,"face"):
+                            # setting fill
+                            if gui:
+                                fill = getrgb(obj.ViewObject.ShapeColor,testbw=False)
+                                fill_opacity = 1 - (obj.ViewObject.Transparency / 100.0)
+                            else:
+                                fill = "#888888"
+                            lstyle = getLineStyle(linestyle, scale)
+                            svg += getPath(wires=[obj.Proxy.face.OuterWire])
                 c = getrgb(obj.ViewObject.TextColor)
                 n = obj.ViewObject.FontName
                 a = 0
@@ -740,16 +754,18 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
                 t2 = obj.ViewObject.Proxy.text2.string.getValues()
                 scale = obj.ViewObject.FirstLine.Value/obj.ViewObject.FontSize.Value
                 f1 = fontsize*scale
-                p2 = FreeCAD.Vector(obj.ViewObject.Proxy.coords.translation.getValue().getValue())
+                p2 = obj.Placement.multVec(FreeCAD.Vector(obj.ViewObject.Proxy.coords.translation.getValue().getValue()))
                 lspc = FreeCAD.Vector(obj.ViewObject.Proxy.header.translation.getValue().getValue())
                 p1 = p2.add(lspc)
                 j = obj.ViewObject.TextAlign
-                svg += getText(c,f1,n,a,getProj(p1, plane),t1,linespacing,j,flip=True)
+                t3 = getText(c,f1,n,a,getProj(p1, plane),t1,linespacing,j,flip=True)
+                svg += t3
                 if t2:
-                    ofs = FreeCAD.Vector(0,lspc.Length,0)
+                    ofs = FreeCAD.Vector(0,-lspc.Length,0)
                     if a:
                         ofs = FreeCAD.Rotation(FreeCAD.Vector(0,0,1),-rotation).multVec(ofs)
-                    svg += getText(c,fontsize,n,a,getProj(p1, plane).add(ofs),t2,linespacing,j,flip=True)
+                    t4 = getText(c,fontsize,n,a,getProj(p1, plane).add(ofs),t2,linespacing,j,flip=True)
+                    svg += t4
 
     elif obj.isDerivedFrom('Part::Feature'):
         if obj.Shape.isNull():
@@ -803,11 +819,11 @@ def getSVG(obj,scale=1,linewidth=0.35,fontsize=12,fillstyle="shape color",direct
         if FreeCAD.GuiUp:
             if hasattr(obj.ViewObject,"EndArrow") and hasattr(obj.ViewObject,"ArrowType") and (len(obj.Shape.Vertexes) > 1):
                 if obj.ViewObject.EndArrow:
-                    p1 = getProj(obj.Shape.Vertexes[-2].Point, plane)
-                    p2 = getProj(obj.Shape.Vertexes[-1].Point, plane)
+                    p1 = getProj(obj.Shape.Vertexes[-1].Point, plane)
+                    p2 = getProj(obj.Shape.Vertexes[-2].Point, plane)
                     angle = -DraftVecUtils.angle(p2.sub(p1))
                     arrowsize = obj.ViewObject.ArrowSize.Value/pointratio
-                    svg += getArrow(obj.ViewObject.ArrowType,p2,arrowsize,stroke,linewidth,angle)
+                    svg += getArrow(obj.ViewObject.ArrowType,p1,arrowsize,stroke,linewidth,angle)
 
     # techdraw expects bottom-to-top coordinates
     if techdraw:

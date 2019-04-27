@@ -1196,7 +1196,7 @@ bool ViewProviderSketch::mouseMove(const SbVec2s &cursorPos, Gui::View3DInventor
         }
         case STATUS_SKETCH_UseRubberBand: {
             // Here we must use the device-pixel-ratio to compute the correct y coordinate (#0003130)
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050600
             qreal dpr = viewer->getGLWidget()->devicePixelRatioF();
 #else
             qreal dpr = 1;
@@ -1749,7 +1749,10 @@ std::set<int> ViewProviderSketch::detectPreselectionConstr(const SoPickedPoint *
                             b != edit->combinedConstrBoxes[constrIdsStr].end(); ++b) {
 
 #ifdef FC_DEBUG
-                            Base::Console().Log("Abs(%f,%f),Trans(%f,%f),Coords(%d,%d),iCoords(%f,%f),icon(%d,%d),isize(%d,%d),boundingbox([%d,%d],[%d,%d])\n", absPos[0],absPos[1],trans[0], trans[1], cursorPos[0], cursorPos[1], iconCoords[0], iconCoords[1], iconX, iconY, iconSize[0], iconSize[1], b->first.topLeft().x(),b->first.topLeft().y(),b->first.bottomRight().x(),b->first.bottomRight().y());
+                            // Useful code to debug coordinates and bounding boxes that does not need to be compiled in for
+                            // any debug operations.
+
+                            /*Base::Console().Log("Abs(%f,%f),Trans(%f,%f),Coords(%d,%d),iCoords(%f,%f),icon(%d,%d),isize(%d,%d),boundingbox([%d,%d],[%d,%d])\n", absPos[0],absPos[1],trans[0], trans[1], cursorPos[0], cursorPos[1], iconCoords[0], iconCoords[1], iconX, iconY, iconSize[0], iconSize[1], b->first.topLeft().x(),b->first.topLeft().y(),b->first.bottomRight().x(),b->first.bottomRight().y());*/
 #endif
 
                             if (b->first.contains(iconX, iconY)) {
@@ -3796,7 +3799,18 @@ void ViewProviderSketch::draw(bool temp /*=false*/, bool rebuildinformationlayer
             for(int i = 0; i < ndiv; i++) {
                 paramlist[i] = firstparam + i * step;
                 pointatcurvelist[i] = spline->pointAtParameter(paramlist[i]);
-                curvaturelist[i] = spline->curvatureAt(paramlist[i]);
+
+                try {
+                    curvaturelist[i] = spline->curvatureAt(paramlist[i]);
+                }
+                catch(Base::CADKernelError &e) {
+                    // it is "just" a visualisation matter OCC could not calculate the curvature
+                    // terminating here would mean that the other shapes would not be drawed.
+                    // Solution: Report the issue and set dummy curvature to 0
+                    e.ReportException();
+                    Base::Console().Error("Curvature graph for B-Spline with GeoId=%d could not be calculated.\n", GeoId);
+                    curvaturelist[i] = 0;
+                }
 
                 if(curvaturelist[i] > maxcurv)
                     maxcurv = curvaturelist[i];
@@ -3997,7 +4011,18 @@ void ViewProviderSketch::draw(bool temp /*=false*/, bool rebuildinformationlayer
         for(int i = 0; i < ndiv; i++) {
             paramlist[i] = firstparam + i * step;
             pointatcurvelist[i] = spline->pointAtParameter(paramlist[i]);
-            curvaturelist[i] = spline->curvatureAt(paramlist[i]);
+
+            try {
+                curvaturelist[i] = spline->curvatureAt(paramlist[i]);
+            }
+            catch(Base::CADKernelError &e) {
+                // it is "just" a visualisation matter OCC could not calculate the curvature
+                // terminating here would mean that the other shapes would not be drawed.
+                // Solution: Report the issue and set dummy curvature to 0
+                e.ReportException();
+                Base::Console().Error("Curvature graph for B-Spline with GeoId=%d could not be calculated.\n", GeoId);
+                curvaturelist[i] = 0;
+            }
 
             try {
                 spline->normalAt(paramlist[i],normallist[i]);
