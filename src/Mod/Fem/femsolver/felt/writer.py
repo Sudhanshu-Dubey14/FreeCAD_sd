@@ -1,5 +1,5 @@
 # ***************************************************************************
-# *   Copyright (c) 2019 Bernd Hahnebach <bernd@bimstatik.org>              *
+# *   Copyright (c) 2019 Sudhanshu Dubey <sudhanshu.thethunder@gmail.com>   *
 # *                                                                         *
 # *   This program is free software; you can redistribute it and/or modify  *
 # *   it under the terms of the GNU Lesser General Public License (LGPL)    *
@@ -19,8 +19,8 @@
 # *                                                                         *
 # ***************************************************************************
 
-__title__ = "OOFEM Writer"
-__author__ = "Bernd Hahnebach"
+__title__ = "FELT Writer"
+__author__ = "Sudhanshu Dubey"
 __url__ = "http://www.freecadweb.org"
 
 ## \addtogroup FEM
@@ -31,7 +31,7 @@ import time
 from .. import writerbase as FemInputWriter
 
 
-class FemInputWriterOOFEM(FemInputWriter.FemInputWriter):
+class FemInputWriterFELT(FemInputWriter.FemInputWriter):
     def __init__(
         self,
         analysis_obj,
@@ -82,13 +82,13 @@ class FemInputWriterOOFEM(FemInputWriter.FemInputWriter):
         # working dir and input file
         from os.path import join
         # self.main_file_name = self.mesh_object.Name + '.in'
-        self.main_file_name = '2DPlaneStress.in'
+        self.main_file_name = 'beam.flt'
         self.file_name = join(self.dir_name, self.main_file_name)
         FreeCAD.Console.PrintLog('FemInputWriterCcx --> self.dir_name  -->  ' + self.dir_name + '\n')
         FreeCAD.Console.PrintLog('FemInputWriterCcx --> self.main_file_name  -->  ' + self.main_file_name + '\n')
         FreeCAD.Console.PrintMessage('FemInputWriterCcx --> self.file_name  -->  ' + self.file_name + '\n')
 
-    def write_OOFEM_input_file(self):
+    def write_FELT_input_file(self):
 
         timestart = time.clock()
 
@@ -101,35 +101,31 @@ class FemInputWriterOOFEM(FemInputWriter.FemInputWriter):
         return self.file_name
 
 
-example_input_file = '''2DPlaneStress.out
-Patch test of PlaneStress2d elements -> pure compression
-LinearStatic nsteps 1 nmodules 1
-vtkxml tstep_all domain_all  primvars 1 1 vars 5 1 2 4 5 27 stype 2
-domain 2dPlaneStress
-OutputManager tstep_all dofman_all element_all
-ndofman 8 nelem 5 ncrosssect 1 nmat 1 nbc 3 nic 0 nltf 1 nset 3
-node 1 coords 3  0.0   0.0   0.0
-node 2 coords 3  0.0   4.0   0.0
-node 3 coords 3  2.0   2.0   0.0
-node 4 coords 3  3.0   1.0   0.0
-node 5 coords 3  8.0   0.8   0.0
-node 6 coords 3  7.0   3.0   0.0
-node 7 coords 3  9.0   0.0   0.0
-node 8 coords 3  9.0   4.0   0.0
-PlaneStress2d 1 nodes 4 1 4 3 2  NIP 1
-PlaneStress2d 2 nodes 4 1 7 5 4  NIP 1
-PlaneStress2d 3 nodes 4 4 5 6 3  NIP 1
-PlaneStress2d 4 nodes 4 3 6 8 2  NIP 1
-PlaneStress2d 5 nodes 4 5 7 8 6  NIP 1
-Set 1 elementranges {(1 5)}
-Set 2 nodes 2 1 2
-Set 3 nodes 2 7 8
-SimpleCS 1 thick 1.0 width 1.0 material 1 set 1
-IsoLE 1 d 0. E 15.0 n 0.25 talpha 1.0
-BoundaryCondition 1 loadTimeFunction 1 dofs 2 1 2 values 1 0.0 set 2
-BoundaryCondition 2 loadTimeFunction 1 dofs 1 2 values 1 0.0 set 3
-NodalLoad 3 loadTimeFunction 1 dofs 2 1 2 components 2 2.5 0.0 set 3
-ConstantFunction 1 f(t) 1.0
+example_input_file = '''problem description
+title="Beam Sample Problem (Logan #5.5, p.188)"
+nodes=3 elements=2
+
+nodes
+1  x=0 y=0 z=0 constraint=free force=point_load
+2  x=240 y=0 z=0 constraint=roller
+3  x=480 y=0 z=0 constraint=fixed
+
+beam elements
+1  nodes=[1,2] material=steel
+2  nodes=[2,3]
+
+material properties
+steel E=3e+07 A=10 Ix=100
+
+constraints
+fixed Tx=c Ty=c Tz=u Rx=u Ry=u Rz=c
+free Tx=u Ty=u Tz=u Rx=u Ry=u Rz=u
+roller Tx=u Ty=c Tz=u Rx=u Ry=u Rz=u
+
+forces
+point_load Fy=-1000
+
+end
 '''
 
 ##  @}
