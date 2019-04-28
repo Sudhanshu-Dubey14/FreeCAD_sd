@@ -472,6 +472,12 @@ def makeSolverZ88(doc, name="SolverZ88"):
     return obj
 
 
+def makeSolverFElt(doc, name="SolverFELT"):
+    '''makeSolverFElt(document, [name]): makes a FELT solver object'''
+    import femsolver.felt.solver
+    obj = femsolver.felt.solver.create(doc, name)
+    return obj
+
 '''
 # get the supportedTypes
 App.newDocument()
