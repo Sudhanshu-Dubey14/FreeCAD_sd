@@ -118,6 +118,11 @@ _SOLVER_PARAM = {
         param_path=_PARAM_PATH + "Z88",
         use_default="UseStandardZ88Location",
         custom_path="z88BinaryPath"),
+    "felt": _SolverDlg(
+        default="felt",
+        param_path=_PARAM_PATH + "felt",
+        use_default="UseStandardFEltLocation",
+        custom_path="FEltBinaryPath"),
 }
 
 

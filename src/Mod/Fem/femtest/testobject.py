@@ -96,6 +96,7 @@ class TestObjectCreate(unittest.TestCase):
         analysis.addObject(ObjectsFem.makeSolverCalculix(doc))
         sol = analysis.addObject(ObjectsFem.makeSolverElmer(doc))[0]
         analysis.addObject(ObjectsFem.makeSolverZ88(doc))
+	analysis.addObject(ObjectsFem.makeSolverFElt(doc))
 
         analysis.addObject(ObjectsFem.makeEquationElasticity(doc, sol))
         analysis.addObject(ObjectsFem.makeEquationElectrostatic(doc, sol))
@@ -178,13 +179,14 @@ class TestObjectType(unittest.TestCase):
         self.assertEqual('Fem::FemSolverCalculixCcxTools', type_of_obj(ObjectsFem.makeSolverCalculixCcxTools(doc)))
         self.assertEqual('Fem::FemSolverObjectCalculix', type_of_obj(ObjectsFem.makeSolverCalculix(doc)))
         self.assertEqual('Fem::FemSolverObjectElmer', type_of_obj(solverelmer))
-        self.assertEqual('Fem::FemSolverObjectZ88', type_of_obj(ObjectsFem.makeSolverZ88(doc)))
+        self.assertEqual('Fem::FemSolverObjectZ88', type_of_obj(ObjectsFem.makeSolverZ88(doc))
+	self.assertEqual('Fem::FemSolverObjectFElt', type_of_obj(ObjectsFem.makeSolverFElt(doc))))
         self.assertEqual('Fem::FemEquationElmerElasticity', type_of_obj(ObjectsFem.makeEquationElasticity(doc, solverelmer)))
         self.assertEqual('Fem::FemEquationElmerElectrostatic', type_of_obj(ObjectsFem.makeEquationElectrostatic(doc, solverelmer)))
         self.assertEqual('Fem::FemEquationElmerFlow', type_of_obj(ObjectsFem.makeEquationFlow(doc, solverelmer)))
         self.assertEqual('Fem::FemEquationElmerFluxsolver', type_of_obj(ObjectsFem.makeEquationFluxsolver(doc, solverelmer)))
         self.assertEqual('Fem::FemEquationElmerHeat', type_of_obj(ObjectsFem.makeEquationHeat(doc, solverelmer)))
-        # is = 43 (just copy in empty file to test)
+        # is = 44 (just copy in empty file to test)
         # TODO: vtk post objs
         # TODO: use different type for fluid and solid material
 
@@ -233,12 +235,13 @@ class TestObjectType(unittest.TestCase):
         self.assertTrue(is_of_type(ObjectsFem.makeSolverCalculix(doc), 'Fem::FemSolverObjectCalculix'))
         self.assertTrue(is_of_type(solverelmer, 'Fem::FemSolverObjectElmer'))
         self.assertTrue(is_of_type(ObjectsFem.makeSolverZ88(doc), 'Fem::FemSolverObjectZ88'))
+	self.assertTrue(is_of_type(ObjectsFem.makeSolverFElt(doc), 'Fem::FemSolverObjectFElt'))
         self.assertTrue(is_of_type(ObjectsFem.makeEquationElasticity(doc, solverelmer), 'Fem::FemEquationElmerElasticity'))
         self.assertTrue(is_of_type(ObjectsFem.makeEquationElectrostatic(doc, solverelmer), 'Fem::FemEquationElmerElectrostatic'))
         self.assertTrue(is_of_type(ObjectsFem.makeEquationFlow(doc, solverelmer), 'Fem::FemEquationElmerFlow'))
         self.assertTrue(is_of_type(ObjectsFem.makeEquationFluxsolver(doc, solverelmer), 'Fem::FemEquationElmerFluxsolver'))
         self.assertTrue(is_of_type(ObjectsFem.makeEquationHeat(doc, solverelmer), 'Fem::FemEquationElmerHeat'))
-        # is = 43 (just copy in empty file to test)
+        # is = 44 (just copy in empty file to test)
 
     def test_femobjects_derivedfromfem(self):
         # try to add all possible True types from inheritance chain see https://forum.freecadweb.org/viewtopic.php?f=10&t=32625
@@ -403,6 +406,11 @@ class TestObjectType(unittest.TestCase):
         self.assertTrue(is_derived_from(ObjectsFem.makeSolverZ88(doc), 'Fem::FemSolverObjectPython'))
         self.assertTrue(is_derived_from(ObjectsFem.makeSolverZ88(doc), 'Fem::FemSolverObjectZ88'))
 
+	self.assertTrue(is_derived_from(ObjectsFem.makeSolverFElt(doc), 'App::DocumentObject'))
+        self.assertTrue(is_derived_from(ObjectsFem.makeSolverFElt(doc), 'Fem::FemSolverObject'))
+        self.assertTrue(is_derived_from(ObjectsFem.makeSolverFElt(doc), 'Fem::FemSolverObjectPython'))
+        self.assertTrue(is_derived_from(ObjectsFem.makeSolverFElt(doc), 'Fem::FemSolverObjectFElt'))
+
         self.assertTrue(is_derived_from(ObjectsFem.makeEquationElasticity(doc, solverelmer), 'App::DocumentObject'))
         self.assertTrue(is_derived_from(ObjectsFem.makeEquationElasticity(doc, solverelmer), 'App::FeaturePython'))
         self.assertTrue(is_derived_from(ObjectsFem.makeEquationElasticity(doc, solverelmer), 'Fem::FemEquationElmerElasticity'))
@@ -468,12 +476,13 @@ class TestObjectType(unittest.TestCase):
         self.assertTrue(ObjectsFem.makeSolverCalculix(doc).isDerivedFrom('Fem::FemSolverObjectPython'))
         self.assertTrue(solverelmer.isDerivedFrom('Fem::FemSolverObjectPython'))
         self.assertTrue(ObjectsFem.makeSolverZ88(doc).isDerivedFrom('Fem::FemSolverObjectPython'))
-        self.assertTrue(ObjectsFem.makeEquationElasticity(doc, solverelmer).isDerivedFrom('App::FeaturePython'))
+         self.assertTrue(ObjectsFem.makeSolverFElt(doc).isDerivedFrom('Fem::FemSolverObjectPython'))
+	self.assertTrue(ObjectsFem.makeEquationElasticity(doc, solverelmer).isDerivedFrom('App::FeaturePython'))
         self.assertTrue(ObjectsFem.makeEquationElectrostatic(doc, solverelmer).isDerivedFrom('App::FeaturePython'))
         self.assertTrue(ObjectsFem.makeEquationFlow(doc, solverelmer).isDerivedFrom('App::FeaturePython'))
         self.assertTrue(ObjectsFem.makeEquationFluxsolver(doc, solverelmer).isDerivedFrom('App::FeaturePython'))
         self.assertTrue(ObjectsFem.makeEquationHeat(doc, solverelmer).isDerivedFrom('App::FeaturePython'))
-        # is = 43 (just copy in empty file to test)
+        # is = 44 (just copy in empty file to test)
 
     def tearDown(self):
         # clearance, is executed after every test
