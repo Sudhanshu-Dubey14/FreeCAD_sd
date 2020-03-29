@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="lt" sourcelanguage="en">
+<TS version="2.1" language="lt" sourcelanguage="en">
   <context>
     <name>AttachmentEditor</name>
     <message>
@@ -94,6 +94,11 @@
       <translation type="unfinished">Error: {err}</translation>
     </message>
     <message>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="594"/>
+      <source>Attachment Offset (in local coordinates):</source>
+      <translation type="unfinished">Attachment Offset (in local coordinates):</translation>
+    </message>
+    <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="595"/>
       <source>Attachment Offset:</source>
       <translation type="unfinished">Attachment Offset:</translation>
@@ -132,11 +137,6 @@
       <translation type="unfinished">Select a shape that is a compound, first! Second selected item (optional) will be treated as a stencil.</translation>
     </message>
     <message>
-      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="105"/>
-      <source>Bad selection</source>
-      <translation type="unfinished">Bad selection</translation>
-    </message>
-    <message>
       <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="103"/>
       <source>Computing the result failed with an error: 
 
@@ -146,6 +146,24 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</source>
       <translation type="unfinished">Computing the result failed with an error: 
 
 {err}
+
+Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translation>
+    </message>
+    <message>
+      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="105"/>
+      <source>Bad selection</source>
+      <translation type="unfinished">Bad selection</translation>
+    </message>
+    <message>
+      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="106"/>
+      <source>Computing the result failed with an error: 
+
+{errstr}
+
+Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</source>
+      <translation type="unfinished">Computing the result failed with an error: 
+
+{errstr}
 
 Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translation>
     </message>
@@ -354,7 +372,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
       <location filename="../../AttacherTexts.cpp" line="313"/>
       <source>Vertex</source>
       <comment>Attacher reference type</comment>
-      <translation type="unfinished">Vertex</translation>
+      <translation>Viršūnė</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="314"/>
@@ -456,7 +474,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
       <location filename="../../AttacherTexts.cpp" line="333"/>
       <source>Solid</source>
       <comment>Attacher reference type</comment>
-      <translation>Pilnaviduris kūnas</translation>
+      <translation>Pilnaviduris daiktas</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="334"/>
@@ -471,7 +489,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
       <location filename="../../AttacherTexts.cpp" line="269"/>
       <source>Deactivated</source>
       <comment>AttachmentPoint mode caption</comment>
-      <translation>Neveikiamas</translation>
+      <translation>Nepriskirta niekam</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="270"/>
@@ -567,7 +585,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
       <location filename="../../AttacherTexts.cpp" line="293"/>
       <source>Vertex</source>
       <comment>AttachmentPoint mode caption</comment>
-      <translation type="unfinished">Vertex</translation>
+      <translation>Viršūnė</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="294"/>
@@ -606,7 +624,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
       <location filename="../../AttacherTexts.cpp" line="200"/>
       <source>Deactivated</source>
       <comment>AttachmentLine mode caption</comment>
-      <translation>Neveikiamas</translation>
+      <translation>Nepriskirta niekam</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="201"/>
@@ -794,7 +812,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
       <location filename="../../AttacherTexts.cpp" line="249"/>
       <source>Line that spans the shortest distance between shapes.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation>Arčiausiai geometrinių kūnų esanti tiesė.</translation>
+      <translation>Trumpiausia daiktus jungianti atkarpa.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="251"/>
@@ -851,7 +869,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
       <location filename="../../AttacherTexts.cpp" line="125"/>
       <source>Deactivated</source>
       <comment>AttachmentPlane mode caption</comment>
-      <translation>Neveikiamas</translation>
+      <translation>Nepriskirta niekam</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="126"/>
@@ -1048,7 +1066,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
       <location filename="../../AttacherTexts.cpp" line="50"/>
       <source>Deactivated</source>
       <comment>Attachment3D mode caption</comment>
-      <translation>Neveikiamas</translation>
+      <translation>Nepriskirta niekam</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="51"/>
@@ -2458,7 +2476,7 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translatio
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="101"/>
       <source>Attachment mode:</source>
-      <translation>Prijungimo būdas:</translation>
+      <translation>Atskaitos sistemos pradžia:</translation>
     </message>
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="121"/>
@@ -3092,7 +3110,7 @@ Please check one or more edge entities first.</translation>
     <message>
       <location filename="../../DlgImportExportIges.ui" line="94"/>
       <source>Import</source>
-      <translation>Importuoti</translation>
+      <translation>Įkelti</translation>
     </message>
     <message>
       <location filename="../../DlgImportExportIges.ui" line="100"/>
@@ -3185,7 +3203,7 @@ Please check one or more edge entities first.</translation>
     <message>
       <location filename="../../DlgImportExportStep.ui" line="153"/>
       <source>Import</source>
-      <translation>Importuoti</translation>
+      <translation>Įkelti</translation>
     </message>
     <message>
       <location filename="../../DlgImportExportStep.ui" line="159"/>
@@ -3686,7 +3704,7 @@ Please check one or more edge entities first.</translation>
     <message>
       <location filename="../../DlgPrimitives.cpp" line="628"/>
       <source>Vertex</source>
-      <translation type="unfinished">Vertex</translation>
+      <translation>Viršūnė</translation>
     </message>
     <message>
       <location filename="../../DlgPrimitives.cpp" line="856"/>
@@ -3745,7 +3763,7 @@ Please check one or more edge entities first.</translation>
       <location filename="../../DlgRevolution.ui" line="201"/>
       <location filename="../../DlgRevolution.ui" line="242"/>
       <source>Click to set this as axis</source>
-      <translation type="unfinished">Click to set this as axis</translation>
+      <translation>Paspauskite, jei norite tai nustatyti kaip ašį</translation>
     </message>
     <message>
       <location filename="../../DlgRevolution.ui" line="204"/>
@@ -3795,14 +3813,14 @@ Please check one or more edge entities first.</translation>
       <source>Revolution axis link is invalid.
 
 %1</source>
-      <translation type="unfinished">Revolution axis link is invalid.
+      <translation>Blogas sukimosi ašies saitas.
 
 %1</translation>
     </message>
     <message>
       <location filename="../../DlgRevolution.cpp" line="289"/>
       <source>Revolution axis direction is zero-length. It must be non-zero.</source>
-      <translation type="unfinished">Revolution axis direction is zero-length. It must be non-zero.</translation>
+      <translation>Sukimo ašis neturi ilgio. Ašis turi turėti ilgį.</translation>
     </message>
     <message>
       <location filename="../../DlgRevolution.cpp" line="299"/>
@@ -3850,7 +3868,7 @@ Please check one or more edge entities first.</translation>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="90"/>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Tessellation&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;span style=" font-weight:400;"&gt;Defines the maximum deviation of the tessellated mesh to the surface. The smaller the value is the slower the render speed which results in increased detail/resolution.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Tessellation&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;span style=" font-weight:400;"&gt;Defines the maximum deviation of the tessellated mesh to the surface. The smaller the value is the slower the render speed which results in increased detail/resolution.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-weight:600;"&gt;Išklotinė&lt;/span&gt;&lt;/p&gt;&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;/p&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;"&gt;&lt;span style=" font-weight:400;"&gt;Apibrėžia didžiausią tinklo išklotinės ant paviršiaus nuokrypį. Mažesnė vertė sulėtina atvaizdavimo greitį, bet padidina detalumą/skyrą.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="93"/>
@@ -3862,7 +3880,7 @@ Please check one or more edge entities first.</translation>
       <source>Maximum angular deflection</source>
       <translation type="unfinished">Maximum angular deflection</translation>
     </message>
-    <message utf8="true">
+    <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="107"/>
       <source> °</source>
       <translation> °</translation>
@@ -3883,7 +3901,7 @@ Please check one or more edge entities first.</translation>
     <message>
       <location filename="../../DlgSettingsGeneral.ui" line="14"/>
       <source>General</source>
-      <translation>Bendri</translation>
+      <translation>Bendrosios</translation>
     </message>
     <message>
       <location filename="../../DlgSettingsGeneral.ui" line="20"/>
@@ -3964,7 +3982,7 @@ Please check one or more edge entities first.</translation>
       <location filename="../../DlgSettingsObjectColor.ui" line="110"/>
       <location filename="../../DlgSettingsObjectColor.ui" line="132"/>
       <source>px</source>
-      <translation>tšk</translation>
+      <translation> tšk.</translation>
     </message>
     <message>
       <location filename="../../DlgSettingsObjectColor.ui" line="151"/>
@@ -4342,7 +4360,7 @@ Please check one or more edge entities first.</translation>
     <message>
       <location filename="../../TaskAttacher.ui" line="101"/>
       <source>Attachment mode:</source>
-      <translation>Prijungimo būdas:</translation>
+      <translation>Atskaitos sistemos pradžia:</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.ui" line="121"/>
@@ -4433,7 +4451,7 @@ Please check one or more edge entities first.</translation>
     <message>
       <location filename="../../TaskAttacher.cpp" line="628"/>
       <source>Vertex</source>
-      <translation type="unfinished">Vertex</translation>
+      <translation>Viršūnė</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.cpp" line="690"/>
@@ -4711,7 +4729,7 @@ in the 3D view for the sweep path.</source>
       <location filename="../../TaskThickness.cpp" line="268"/>
       <location filename="../../TaskThickness.cpp" line="278"/>
       <source>Thickness</source>
-      <translation type="unfinished">Thickness</translation>
+      <translation>Storis</translation>
     </message>
     <message>
       <location filename="../../TaskThickness.cpp" line="159"/>
@@ -4885,7 +4903,7 @@ Ar vistiek norite tęsti?</translation>
       <location filename="../../TaskAttacher.cpp" line="86"/>
       <location filename="../../TaskCheckGeometry.cpp" line="85"/>
       <source>Vertex</source>
-      <translation type="unfinished">Vertex</translation>
+      <translation>Viršūnė</translation>
     </message>
     <message>
       <location filename="../../TaskCheckGeometry.cpp" line="78"/>
@@ -4900,7 +4918,7 @@ Ar vistiek norite tęsti?</translation>
     <message>
       <location filename="../../TaskCheckGeometry.cpp" line="80"/>
       <source>Solid</source>
-      <translation>Pilnaviduris kūnas</translation>
+      <translation>Pilnaviduris daiktas</translation>
     </message>
     <message>
       <location filename="../../TaskCheckGeometry.cpp" line="81"/>
@@ -5266,7 +5284,7 @@ Ar vistiek norite tęsti?</translation>
     <message>
       <location filename="../../Workbench.cpp" line="43"/>
       <source>Primitives</source>
-      <translation>Paprasčiausi kūnai</translation>
+      <translation>Paprastieji daiktai</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="44"/>
@@ -5276,7 +5294,7 @@ Ar vistiek norite tęsti?</translation>
     <message>
       <location filename="../../Workbench.cpp" line="45"/>
       <source>Split</source>
-      <translation type="unfinished">Split</translation>
+      <translation>Skelti</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="46"/>

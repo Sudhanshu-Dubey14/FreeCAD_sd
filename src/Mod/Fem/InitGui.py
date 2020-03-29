@@ -1,14 +1,5 @@
-# Fem gui init module
-# (c) 2009 Juergen Riegel
-#
-# Gathering all the information to start FreeCAD
-# This is the second one of three init scripts, the third one
-# runs when the gui is up
-
 # ***************************************************************************
-# *   (c) Juergen Riegel (juergen.riegel@web.de) 2009                       *
-# *                                                                         *
-# *   This file is part of the FreeCAD CAx development system.              *
+# *   Copyright (c) 2009 Juergen Riegel <juergen.riegel@web.de>             *
 # *                                                                         *
 # *   This program is free software; you can redistribute it and/or modify  *
 # *   it under the terms of the GNU Lesser General Public License (LGPL)    *
@@ -26,15 +17,20 @@
 # *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
 # *   USA                                                                   *
 # *                                                                         *
-# *   Juergen Riegel 2002                                                   *
 # ***************************************************************************/
+
+# Fem gui init module
+# Gathering all the information to start FreeCAD
+# This is the second one of three init scripts
+# the third one runs when the gui is up
 
 import FreeCAD
 import FreeCADGui
 
 
-class FemWorkbench (Workbench):
+class FemWorkbench(Workbench):
     "Fem workbench object"
+
     def __init__(self):
         self.__class__.Icon = FreeCAD.getResourceDir() + "Mod/Fem/Resources/icons/FemWorkbench.svg"
         self.__class__.MenuText = "FEM"
@@ -47,6 +43,7 @@ class FemWorkbench (Workbench):
         import femcommands.commands
 
     def GetClassName(self):
+        # see https://forum.freecadweb.org/viewtopic.php?f=10&t=43300
         return "FemGui::Workbench"
 
 

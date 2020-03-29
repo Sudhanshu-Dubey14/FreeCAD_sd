@@ -155,7 +155,7 @@
     <message>
       <location filename="../../CommandBody.cpp" line="633"/>
       <source>Duplicate selected object</source>
-      <translation>Duplicar los objetos seleccionados</translation>
+      <translation>Duplicar el objeto seleccionado</translation>
     </message>
     <message>
       <location filename="../../CommandBody.cpp" line="634"/>
@@ -795,11 +795,11 @@
   â¢ the active Body does not contain a base shape, so there is no
   material to be removed;
   â¢ the selected sketch does not belong to the active Body.</source>
-      <translation type="unfinished">The requested feature cannot be created. The reason may be that:
+      <translation>La función solicitada no puede ser creada. La razón puede ser que:
 
-  â¢ the active Body does not contain a base shape, so there is no
-  material to be removed;
-  â¢ the selected sketch does not belong to the active Body.</translation>
+ â¢ el cuerpo activo no contiene una forma base, por lo que no hay 
+material para ser eliminado;
+ â¢ el croquis seleccionado no pertenece al cuerpo activo.</translation>
     </message>
   </context>
   <context>
@@ -811,11 +811,11 @@
   â¢ the active Body does not contain a base shape, so there is no
   material to be removed;
   â¢ the selected sketch does not belong to the active Body.</source>
-      <translation type="unfinished">The requested feature cannot be created. The reason may be that:
+      <translation>La función solicitada no puede ser creada. La razón puede ser que:
 
-  â¢ the active Body does not contain a base shape, so there is no
-  material to be removed;
-  â¢ the selected sketch does not belong to the active Body.</translation>
+ â¢ el cuerpo activo no contiene una forma base, por lo que no hay 
+material para ser eliminado;
+ â¢ el croquis seleccionado no pertenece al cuerpo activo.</translation>
     </message>
   </context>
   <context>
@@ -827,11 +827,11 @@
   â¢ the active Body does not contain a base shape, so there is no
   material to be removed;
   â¢ the selected sketch does not belong to the active Body.</source>
-      <translation type="unfinished">The requested feature cannot be created. The reason may be that:
+      <translation>La función solicitada no puede ser creada. La razón puede ser que:
 
-  â¢ the active Body does not contain a base shape, so there is no
-  material to be removed;
-  â¢ the selected sketch does not belong to the active Body.</translation>
+ â¢ el cuerpo activo no contiene una forma base, por lo que no hay 
+material para ser eliminado;
+ â¢ el croquis seleccionado no pertenece al cuerpo activo.</translation>
     </message>
   </context>
   <context>
@@ -1055,7 +1055,7 @@
     <message>
       <location filename="../../DlgReference.ui" line="20"/>
       <source>You selected geometries which are not part of the active body. Please define how to handle those selections. If you do not want those references cancel the command.</source>
-      <translation>Se habían seleccionado geometrías que no son parte del cuerpo activo. Por favor defina cómo manejar esas selecciones. Si no desea esas referencias cancele el comando.</translation>
+      <translation>has Seleccionado geometrías que no son parte del cuerpo activo. Define cómo manejar esas selecciones. Si no deseas esas referencias, cancela el comando.</translation>
     </message>
     <message>
       <location filename="../../DlgReference.ui" line="42"/>

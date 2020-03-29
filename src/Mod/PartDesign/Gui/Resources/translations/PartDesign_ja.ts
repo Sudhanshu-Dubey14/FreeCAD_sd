@@ -34,7 +34,7 @@
     <message>
       <location filename="../../Command.cpp" line="1305"/>
       <source>Sweep a selected sketch along a path or to other profiles</source>
-      <translation>選択したスケッチを、パスやプロファイルに沿ってスイープ</translation>
+      <translation>選択したスケッチを、パスや他のプロファイルに沿ってスイープ</translation>
     </message>
   </context>
   <context>
@@ -795,11 +795,10 @@
   â¢ the active Body does not contain a base shape, so there is no
   material to be removed;
   â¢ the selected sketch does not belong to the active Body.</source>
-      <translation type="unfinished">The requested feature cannot be created. The reason may be that:
+      <translation>要求されたフィーチャーを作成できません。原因は以下である可能性があります。
 
-  â¢ the active Body does not contain a base shape, so there is no
-  material to be removed;
-  â¢ the selected sketch does not belong to the active Body.</translation>
+・ アクティブなボディーにベースシェイプが無くて、それらは削除されているのでマテリアルが存在しないのでしょう。
+・ 選択されたスケッチがアクティブなボディーに属していない。</translation>
     </message>
   </context>
   <context>
@@ -811,11 +810,10 @@
   â¢ the active Body does not contain a base shape, so there is no
   material to be removed;
   â¢ the selected sketch does not belong to the active Body.</source>
-      <translation type="unfinished">The requested feature cannot be created. The reason may be that:
+      <translation>要求されたフィーチャーを作成できません。原因は以下である可能性があります。
 
-  â¢ the active Body does not contain a base shape, so there is no
-  material to be removed;
-  â¢ the selected sketch does not belong to the active Body.</translation>
+・ アクティブなボディーにベースシェイプが無くて、それらは削除されているのでマテリアルが存在しないのでしょう。
+・ 選択されたスケッチがアクティブなボディーに属していない。</translation>
     </message>
   </context>
   <context>
@@ -827,11 +825,10 @@
   â¢ the active Body does not contain a base shape, so there is no
   material to be removed;
   â¢ the selected sketch does not belong to the active Body.</source>
-      <translation type="unfinished">The requested feature cannot be created. The reason may be that:
+      <translation>要求されたフィーチャーを作成できません。原因は以下である可能性があります。
 
-  â¢ the active Body does not contain a base shape, so there is no
-  material to be removed;
-  â¢ the selected sketch does not belong to the active Body.</translation>
+・ アクティブなボディーにベースシェイプが無くて、それらは削除されているのでマテリアルが存在しないのでしょう。
+・ 選択されたスケッチがアクティブなボディーに属していない。</translation>
     </message>
   </context>
   <context>
@@ -3357,7 +3354,7 @@ Although you will be able to migrate any moment later with 'Part Design-&gt;Migr
     <message>
       <location filename="../../Workbench.cpp" line="51"/>
       <source>Part Design</source>
-      <translation>部品設計</translation>
+      <translation>パートデザイン</translation>
     </message>
   </context>
 </TS>

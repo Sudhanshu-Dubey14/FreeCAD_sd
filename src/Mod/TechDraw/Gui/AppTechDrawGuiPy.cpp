@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (c) WandererFan            (wandererfan@gmail.com) 2016     *
-*                                                                          *
+ *   Copyright (c) 2016 WandererFan <wandererfan@gmail.com>                *
+ *                                                                         *
  *   This file is part of the FreeCAD CAx development system.              *
  *                                                                         *
  *   This library is free software; you can redistribute it and/or         *
@@ -38,22 +38,25 @@
 #include <Base/VectorPy.h>
 
 #include <App/Document.h>
+#include <App/DocumentPy.h>
 #include <App/DocumentObject.h>
 #include <App/DocumentObjectPy.h>
+#include <App/Material.h>
 #include <Gui/Application.h>
 #include <Gui/Document.h>
 #include <Gui/ViewProvider.h>
-
+#include <Gui/WidgetFactory.h>   //for PythonWrappers
 
 #include <Mod/Part/App/OCCError.h>
 #include <Mod/TechDraw/App/DrawPage.h>
+#include <Mod/TechDraw/App/DrawView.h>
+#include <Mod/TechDraw/App/DrawUtil.h>
+#include <Mod/TechDraw/App/DrawViewPy.h>  // generated from DrawViewPy.xml
 
 #include "MDIViewPage.h"
 #include "ViewProviderPage.h"
-
-namespace TechDrawGui {
-//module level static C++ functions go here
-}
+#include "ViewProviderDrawingView.h"
+#include "Grabber3d.h"
 
 namespace TechDrawGui {
 
@@ -70,6 +73,12 @@ public:
         );
         add_varargs_method("exportPageAsSvg",&Module::exportPageAsSvg,
             "exportPageAsSvg(DrawPageObject,FilePath) -- print page as Svg to file."
+        );
+        add_varargs_method("copyActiveViewToSvgFile",&Module::copyActiveViewToSvgFile,
+            "copyActiveViewToSvgFile(DrawPageObject,FilePath) -- copy ActiveView to Svg file."
+        );
+        add_varargs_method("addQGIToView",&Module::addQGIToView,
+            "addQGIToView(View, QGraphicsItem) -- insert graphics item into view's graphic."
         );
         initialize("This is a module for displaying drawings"); // register with Python
     }
@@ -148,7 +157,7 @@ private:
                     }
                 }
                 else {
-                    throw Py::TypeError("Export of this object type is not supported by TechDraw module");
+                    throw Py::TypeError("No Technical Drawing Page found in selection.");
                 }
             }
         }
@@ -237,7 +246,113 @@ private:
 
         return Py::None();
     }
+ 
+//!copyActiveViewToSvgFile(document, fileSpec)
+    Py::Object copyActiveViewToSvgFile(const Py::Tuple& args)
+    {
+        double result = 1.0;
+        PyObject *docObj = nullptr;
+        PyObject *colorObj = nullptr;
+        PyObject *paintObj = Py_True;
+        char* name;
 
+        App::Document* appDoc = nullptr;
+        std::string fileSpec;
+        double outWidth = 138.5;    //TODO: change to A4 for release
+        double outHeight = 95.0;    //ISO A5 defaults
+        bool paintBackground = true; 
+        QColor bgColor = QColor(Qt::white);
+        double lineWidth = 1.0;     //1 mm
+        double border = 0.0;        //no border
+        int mode = 0;               //SoRenderManager::RenderMode(0) - AS_IS
+
+        if (!PyArg_ParseTuple(args.ptr(), "Oet|ddOOddi",
+                                        &docObj, "utf-8",&name,
+                                        &outWidth, &outHeight,
+                                        &paintObj, &colorObj,
+                                        &lineWidth, &border,
+                                        &mode)) {
+            throw Py::TypeError("expected (doc, file|,options)");
+        } 
+
+        fileSpec = std::string(name);
+        PyMem_Free(name);
+
+        if (paintObj == Py_True) {
+            paintBackground = true;
+        } else {
+            paintBackground = false;
+        }
+
+        
+        try {
+           if (PyObject_TypeCheck(docObj, &(App::DocumentPy::Type))) {
+               appDoc = static_cast<App::DocumentPy*>(docObj)->getDocumentPtr();
+               if ( (colorObj != nullptr) && 
+                    PyTuple_Check(colorObj)) {
+                   App::Color c = TechDraw::DrawUtil::pyTupleToColor(colorObj);
+                   bgColor = c.asValue<QColor>();
+               }
+               result = 
+               Grabber3d::copyActiveViewToSvgFile(appDoc, fileSpec,
+                                         outWidth, outHeight,
+                                         paintBackground, bgColor,
+                                         lineWidth, border,
+                                         mode);                         //TODO: add svg scale factor?
+           }
+        }
+        catch (Base::Exception &e) {
+            throw Py::Exception(Base::BaseExceptionFreeCADError, e.what());
+        }
+
+        PyObject* pyResult = nullptr;
+        pyResult = PyFloat_FromDouble(result);
+        return Py::asObject(pyResult);
+    }
+
+    Py::Object addQGIToView(const Py::Tuple& args)
+    {
+        PyObject *viewPy = nullptr;
+        PyObject *qgiPy = nullptr;
+        if (!PyArg_ParseTuple(args.ptr(), "OO", &viewPy, &qgiPy)) {
+            throw Py::TypeError("expected (view, item)");
+        } 
+
+        try {
+           App::DocumentObject* obj = 0;
+           Gui::ViewProvider* vp = 0;
+           QGIView* qgiv = nullptr;
+           if (PyObject_TypeCheck(viewPy, &(TechDraw::DrawViewPy::Type))) {
+               obj = static_cast<App::DocumentObjectPy*>(viewPy)->getDocumentObjectPtr();
+               vp = Gui::Application::Instance->getViewProvider(obj);
+               if (vp) {
+                   TechDrawGui::ViewProviderDrawingView* vpdv = 
+                                dynamic_cast<TechDrawGui::ViewProviderDrawingView*>(vp);
+                   if (vpdv) {
+                       qgiv = vpdv->getQView();
+                       if (qgiv != nullptr) {
+                           Gui::PythonWrapper wrap;
+                           if (!wrap.loadCoreModule() ||
+                               !wrap.loadGuiModule() ||
+                               !wrap.loadWidgetsModule()) {
+                               PyErr_SetString(PyExc_RuntimeError, "Failed to load Python wrapper for Qt");
+                               return Py::None();
+                            }
+                            QGraphicsItem* item = wrap.toQGraphicsItem(qgiPy);
+                            if (item != nullptr) {
+                                qgiv->addArbitraryItem(item);
+                            }
+                        }
+                   }
+               }
+           }
+        }
+        catch (Base::Exception &e) {
+                throw Py::Exception(Base::BaseExceptionFreeCADError, e.what());
+        }
+
+        return Py::None();
+    }
  };
 
 PyObject* initModule()

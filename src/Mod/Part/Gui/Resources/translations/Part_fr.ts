@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr" sourcelanguage="en">
+<TS version="2.1" language="fr" sourcelanguage="en">
   <context>
     <name>AttachmentEditor</name>
     <message>
@@ -94,6 +94,11 @@
       <translation>Erreur : {err}</translation>
     </message>
     <message>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="594"/>
+      <source>Attachment Offset (in local coordinates):</source>
+      <translation type="unfinished">Attachment Offset (in local coordinates):</translation>
+    </message>
+    <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="595"/>
       <source>Attachment Offset:</source>
       <translation>Compensation d'accrochage :</translation>
@@ -132,11 +137,6 @@
       <translation>Sélectionnez d’abord une forme qui soit un composé ! Le second élément sélectionné (facultatif) sera utilisé comme un pochoir.</translation>
     </message>
     <message>
-      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="105"/>
-      <source>Bad selection</source>
-      <translation>Sélection non valide</translation>
-    </message>
-    <message>
       <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="103"/>
       <source>Computing the result failed with an error: 
 
@@ -148,6 +148,24 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</source>
 {err}
 
 Cliquez sur « Continuer » pour créer la fonction de toute façon, ou « Annuler » pour annuler.</translation>
+    </message>
+    <message>
+      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="105"/>
+      <source>Bad selection</source>
+      <translation>Sélection non valide</translation>
+    </message>
+    <message>
+      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="106"/>
+      <source>Computing the result failed with an error: 
+
+{errstr}
+
+Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</source>
+      <translation type="unfinished">Computing the result failed with an error: 
+
+{errstr}
+
+Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translation>
     </message>
   </context>
   <context>
@@ -263,7 +281,7 @@ Cliquez sur « Continuer » pour créer la fonction de toute façon, ou « An
     <message>
       <location filename="../../../BasicShapes/Shapes.py" line="62"/>
       <source>Creates a tube</source>
-      <translation>Créer un tube</translation>
+      <translation>Crée un tube</translation>
     </message>
   </context>
   <context>
@@ -299,7 +317,7 @@ Cliquez sur « Continuer » pour créer la fonction de toute façon, ou « An
     <message>
       <location filename="../../../BOPTools/SplitFeatures.py" line="176"/>
       <source>Split objects where they intersect</source>
-      <translation>Diviser les objets où ils se croisent</translation>
+      <translation>Diviser les objets à leur intersection</translation>
     </message>
     <message>
       <location filename="../../../BOPTools/SplitFeatures.py" line="478"/>
@@ -324,7 +342,7 @@ Cliquez sur « Continuer » pour créer la fonction de toute façon, ou « An
     <message>
       <location filename="../../../BOPTools/SplitFeatures.py" line="334"/>
       <source>Slice apart</source>
-      <translation>Trancher</translation>
+      <translation>Séparer</translation>
     </message>
     <message>
       <location filename="../../../BOPTools/SplitFeatures.py" line="336"/>
@@ -1766,7 +1784,7 @@ Cliquez sur « Continuer » pour créer la fonction de toute façon, ou « An
     <message>
       <location filename="../../Command.cpp" line="784"/>
       <source>Compound tools: working with lists of shapes.</source>
-      <translation>Outils de compilation : travailler avec des listes de formes.</translation>
+      <translation>Outils de composition : travailler avec des listes de formes.</translation>
     </message>
   </context>
   <context>
@@ -1815,7 +1833,7 @@ Cliquez sur « Continuer » pour créer la fonction de toute façon, ou « An
     <message>
       <location filename="../../Command.cpp" line="661"/>
       <source>Split objects...</source>
-      <translation>Objets éclatés...</translation>
+      <translation>Éclater des objets...</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="662"/>
@@ -1932,7 +1950,7 @@ Cliquez sur « Continuer » pour créer la fonction de toute façon, ou « An
     <message>
       <location filename="../../CommandSimple.cpp" line="273"/>
       <source>Remove feature from a shape</source>
-      <translation>Supprimer la fonctionnalité d’une forme</translation>
+      <translation>Supprimer la fonction d’une forme</translation>
     </message>
   </context>
   <context>
@@ -2148,7 +2166,7 @@ Cliquez sur « Continuer » pour créer la fonction de toute façon, ou « An
     <message>
       <location filename="../../Command.cpp" line="1674"/>
       <source>Utility to offset planar shapes</source>
-      <translation>Utilitaire pour décaler les formes planaires</translation>
+      <translation>Utilitaire pour décaler des formes planaires</translation>
     </message>
   </context>
   <context>
@@ -3859,7 +3877,7 @@ Please check one or more edge entities first.</source>
       <source>Maximum angular deflection</source>
       <translation>Déviation angulaire maximale</translation>
     </message>
-    <message utf8="true">
+    <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="107"/>
       <source> °</source>
       <translation> °</translation>
@@ -4205,7 +4223,7 @@ Please check one or more edge entities first.</source>
     <message>
       <location filename="../../TaskShapeBuilder.cpp" line="522"/>
       <source>Select adjacent edges</source>
-      <translation>Sélectionnez les bords adjacents</translation>
+      <translation>Sélectionnez des bords adjacents</translation>
     </message>
     <message>
       <location filename="../../TaskShapeBuilder.cpp" line="529"/>
@@ -4669,7 +4687,7 @@ Please check one or more edge entities first.</source>
     <message>
       <location filename="../../TaskShapeBuilder.ui" line="116"/>
       <source>Wire from edges</source>
-      <translation>Fil à partir des arêtes</translation>
+      <translation>Fil à partir d'arêtes</translation>
     </message>
   </context>
   <context>

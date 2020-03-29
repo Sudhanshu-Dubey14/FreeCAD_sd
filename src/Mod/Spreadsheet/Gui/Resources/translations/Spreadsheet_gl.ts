@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="gl" sourcelanguage="en">
+<TS version="2.1" language="gl" sourcelanguage="en">
   <context>
     <name>CmdCreateSpreadsheet</name>
     <message>
@@ -147,8 +147,8 @@
       <translation>Combinar celas</translation>
     </message>
     <message>
-      <source>Merge selected cells in spreadsheet</source>
-      <translation>Combina as celas escolmadas nunha, na folla de cálculo</translation>
+      <source>Merge selected cells</source>
+      <translation>Fundir celas escolmadas</translation>
     </message>
   </context>
   <context>
@@ -177,8 +177,8 @@
       <translation>Dividir cela</translation>
     </message>
     <message>
-      <source>Split previously merged cells in spreadsheet</source>
-      <translation>Divide celas combinadas anteriormente na folla de cálculo</translation>
+      <source>Split previously merged cells</source>
+      <translation>Dividir celas previamente mesturadas</translation>
     </message>
   </context>
   <context>
@@ -192,8 +192,8 @@
       <translation>Texto en grosa</translation>
     </message>
     <message>
-      <source>Set bold text in selected cells</source>
-      <translation>Establece o texto das celas escolmadas en grosa</translation>
+      <source>Set text in selected cells bold</source>
+      <translation>Conxunto de texto en celas escolmadas en negro</translation>
     </message>
   </context>
   <context>
@@ -207,8 +207,8 @@
       <translation>Texto en cursiva</translation>
     </message>
     <message>
-      <source>Set italic text in selected cells</source>
-      <translation>Establece o texto das celas escolmadas en cursiva</translation>
+      <source>Set text in selected cells italic</source>
+      <translation>Conxunto de texto en celas escolmadas en itálica</translation>
     </message>
   </context>
   <context>
@@ -331,10 +331,6 @@
       <translation>Exportar ficheiro</translation>
     </message>
     <message>
-      <source>Cell contents</source>
-      <translation>Contido da cela</translation>
-    </message>
-    <message>
       <source>Show spreadsheet</source>
       <translation>Amosar a folla de cálculo</translation>
     </message>
@@ -353,6 +349,20 @@
     <message>
       <source>Sets the Spreadsheet cell(s) background color</source>
       <translation>Definir a cor do plano de fondo da(s) célula(s) da folla de cálculo</translation>
+    </message>
+    <message>
+      <source>Spreadsheet</source>
+      <translation>Folla de cálculo</translation>
+    </message>
+    <message>
+      <source>Spreadsheet does not support range selection when pasting.
+Please select one cell only.</source>
+      <translation type="unfinished">Spreadsheet does not support range selection when pasting.
+Please select one cell only.</translation>
+    </message>
+    <message>
+      <source>Copy &amp; Paste failed</source>
+      <translation type="unfinished">Copy &amp; Paste failed</translation>
     </message>
   </context>
   <context>
@@ -426,8 +436,8 @@
       <translation>Gris claro</translation>
     </message>
     <message>
-      <source>Custom</source>
-      <translation>Personalizar</translation>
+      <source>Custom Color</source>
+      <translation>Personalizar cor</translation>
     </message>
   </context>
   <context>

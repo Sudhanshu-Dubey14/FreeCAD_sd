@@ -70,7 +70,7 @@
     <message>
       <location filename="../../Command.cpp" line="2237"/>
       <source>Boolean operation with two or more bodies</source>
-      <translation>İki ya da daha fazla gövdeli Boolean işlem uygula</translation>
+      <translation>İki veya daha fazla gövdeye sahip Mantıksal işlem</translation>
     </message>
   </context>
   <context>
@@ -250,7 +250,7 @@
     <message>
       <location filename="../../Command.cpp" line="1943"/>
       <source>Create a linear pattern feature</source>
-      <translation>Doğrusal kopyalar oluştur</translation>
+      <translation>Doğrusal çoğaltım özelliği oluştur</translation>
     </message>
   </context>
   <context>
@@ -286,7 +286,7 @@
     <message>
       <location filename="../../Command.cpp" line="1879"/>
       <source>Create a mirrored feature</source>
-      <translation>Yansıtılmış bir özellik oluşturma</translation>
+      <translation>Bir Aynalama özelliği oluştur</translation>
     </message>
   </context>
   <context>
@@ -353,12 +353,12 @@
     <message>
       <location filename="../../Command.cpp" line="2115"/>
       <source>Create MultiTransform</source>
-      <translation>MultiTransform oluştur</translation>
+      <translation>ÇokluDönüşüm oluştur</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2116"/>
       <source>Create a multitransform feature</source>
-      <translation>Çoklu dönüştürme özelliği oluşturma</translation>
+      <translation>Bir ÇokluDönüşüm özelliği oluştur</translation>
     </message>
   </context>
   <context>
@@ -461,12 +461,12 @@
     <message>
       <location filename="../../Command.cpp" line="2008"/>
       <source>PolarPattern</source>
-      <translation>Kutupsal şablon</translation>
+      <translation>Dairesel Çoğaltım</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2009"/>
       <source>Create a polar pattern feature</source>
-      <translation>Kutupsal kopyalar oluştur</translation>
+      <translation>Dairesel çoğaltım özelliği oluştur</translation>
     </message>
   </context>
   <context>
@@ -502,7 +502,7 @@
     <message>
       <location filename="../../Command.cpp" line="2076"/>
       <source>Create a scaled feature</source>
-      <translation>Ölçeklendirilmiş bir özellik oluşturma</translation>
+      <translation>Ölçekleme özellik oluştur</translation>
     </message>
   </context>
   <context>
@@ -876,7 +876,7 @@
       <location filename="../../TaskPrimitiveParameters.ui" line="1260"/>
       <location filename="../../TaskPrimitiveParameters.ui" line="1325"/>
       <source>Radius:</source>
-      <translation>Yarıçapı:</translation>
+      <translation>Yarıçap:</translation>
     </message>
     <message>
       <location filename="../../TaskPrimitiveParameters.ui" line="385"/>
@@ -959,7 +959,7 @@
     <message>
       <location filename="../../TaskPrimitiveParameters.ui" line="1145"/>
       <source>Pitch:</source>
-      <translation>Saha:</translation>
+      <translation>Hatve (Aralık):</translation>
     </message>
     <message>
       <location filename="../../TaskPrimitiveParameters.ui" line="1166"/>
@@ -1101,7 +1101,7 @@
     <message>
       <location filename="../../TaskBooleanParameters.ui" line="48"/>
       <source>Fuse</source>
-      <translation>Sigorta</translation>
+      <translation>Birleştir</translation>
     </message>
     <message>
       <location filename="../../TaskBooleanParameters.ui" line="53"/>
@@ -1384,7 +1384,7 @@
     <message>
       <location filename="../../TaskFilletParameters.ui" line="49"/>
       <source>Radius:</source>
-      <translation>Yarıçapı:</translation>
+      <translation>Yarıçap:</translation>
     </message>
     <message>
       <location filename="../../TaskFilletParameters.cpp" line="87"/>
@@ -1629,22 +1629,22 @@
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="90"/>
       <source>Add mirrored transformation</source>
-      <translation>Yansıtılmış dönüşüm ekle</translation>
+      <translation>Aynalama özelliği ekle</translation>
     </message>
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="94"/>
       <source>Add linear pattern</source>
-      <translation>Doğrusal desen ekle</translation>
+      <translation>Doğrusal çoğaltım ekle</translation>
     </message>
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="98"/>
       <source>Add polar pattern</source>
-      <translation>Kutup deseni ekleyin</translation>
+      <translation>Dairesel çoğaltım ekle</translation>
     </message>
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="102"/>
       <source>Add scaled transformation</source>
-      <translation>Ölçeklendirilmiş dönüşüm ekle</translation>
+      <translation>Ölçekleme dönüşümü ekle</translation>
     </message>
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="106"/>
@@ -2313,7 +2313,7 @@
     <message>
       <location filename="../../TaskTransformedMessages.cpp" line="43"/>
       <source>Transformed feature messages</source>
-      <translation>Dönüştürülmüş özellik mesajları</translation>
+      <translation>Dönüştürücü özelliği bildirileri</translation>
     </message>
   </context>
   <context>
@@ -2922,7 +2922,7 @@ Gövdeye sahip olmayan nesneler içeren eski bir belgeniz varsa, bunları bir g�
     <message>
       <location filename="../../ViewProviderBoolean.cpp" line="68"/>
       <source>Edit boolean</source>
-      <translation>Boolean değerini düzenle</translation>
+      <translation>Mantıksal işlemi düzenle</translation>
     </message>
     <message>
       <location filename="../../ViewProviderDatum.cpp" line="121"/>
@@ -3018,12 +3018,12 @@ Bu özellik bozuk ve düzenlenemiyor.</translation>
     <message>
       <location filename="../../ViewProviderTransformed.cpp" line="152"/>
       <source>One transformed shape does not intersect support</source>
-      <translation>Dönüştürülmüş bir şekil destek ile kesişmiyor</translation>
+      <translation>Bir dönüştürülmüş şekil destek ile kesişmiyor</translation>
     </message>
     <message>
       <location filename="../../ViewProviderTransformed.cpp" line="154"/>
       <source>%1 transformed shapes do not intersect support</source>
-      <translation>%1 dönüştürülmüş şekil kesişmiyor destek</translation>
+      <translation>%1 dönüştürülmüş şekil desteği kesişmiyor</translation>
     </message>
     <message>
       <location filename="../../ViewProviderTransformed.cpp" line="163"/>

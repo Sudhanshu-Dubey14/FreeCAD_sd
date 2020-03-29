@@ -24,6 +24,7 @@
 # This is the start page template. It builds a HTML global variable that contains
 # the html code of the start page. It is built only once per FreeCAD session for now...
 
+import six
 import sys,os,FreeCAD,FreeCADGui,tempfile,time,zipfile,urllib,re
 from . import TranslationTexts
 from PySide import QtCore,QtGui
@@ -41,8 +42,8 @@ def encode(text):
 
     "make sure we are always working with unicode in python2"
 
-    if sys.version_info.major < 3:
-        if not isinstance(text,unicode):
+    if six.PY2:
+        if not isinstance(text,six.text_type):
             return text.decode("utf8")
     return text
 
@@ -99,6 +100,22 @@ def getInfo(filename):
             hsize = str(int(size)) + "b"
         return hsize
 
+    def getFreeDesktopThumbnail(filename):
+        "if we have gnome libs available, try to find a system-generated thumbnail"
+        try:
+            import gnome.ui
+            import gnomevfs
+        except:
+            return None
+
+        path = os.path.abspath(filename)
+        uri = gnomevfs.get_uri_from_local_path(path)
+        thumb = gnome.ui.thumbnail_path_for_uri(uri, "normal")
+        if os.path.exists(thumb):
+            return thumb
+        return None
+
+
     if os.path.exists(filename):
 
         if os.path.isdir(filename):
@@ -130,6 +147,9 @@ def getInfo(filename):
                 r = re.findall("Property name=\"CreatedBy.*?String value=\"(.*?)\"\/>",doc)
                 if r:
                     author = r[0]
+                    # remove email if present in author field
+                    if "&lt;" in author:
+                        author = author.split("&lt;")[0].strip()
                 r = re.findall("Property name=\"Company.*?String value=\"(.*?)\"\/>",doc)
                 if r:
                     company = r[0]
@@ -150,6 +170,17 @@ def getInfo(filename):
                         thumb.close()
                         iconbank[filename] = image
 
+        # use image itself as icon if it's an image file
+        if os.path.splitext(filename)[1].lower() in [".jpg",".jpeg",".png",".svg"]:
+            image = filename
+            iconbank[filename] = image
+
+        # use freedesktop thumbnail if available
+        fdthumb = getFreeDesktopThumbnail(filename)
+        if fdthumb:
+            image = fdthumb
+            iconbank[filename] = fdthumb
+
         # retrieve default mime icon if needed
         if not image:
             i = QtCore.QFileInfo(filename)
@@ -168,7 +199,6 @@ def getInfo(filename):
                 else:
                     image = getDefaultIcon()
                 iconbank[t] = image
-
         return [image,size,author,ctime,mtime,descr,company,lic]
 
     return None
@@ -182,7 +212,7 @@ def getDefaultIcon():
     global defaulticon
 
     if not defaulticon:
-        i = QtCore.QFileInfo("Unknown")
+        i = QtCore.QFileInfo(__file__) # MUST provide an existing file in qt5
         icon = iconprovider.icon(i)
         preferred = icon.actualSize(QtCore.QSize(128,128))
         px = icon.pixmap(preferred)
@@ -218,8 +248,8 @@ def buildCard(filename,method,arg=None):
                 result += '<img src="file:///'+image+'">'
                 result += '<div class="caption">'
                 result += '<h4>'+encode(basename)+'</h4>'
-                result += '<p>'+size+'</p>'
                 result += '<p>'+encode(author)+'</p>'
+                result += '<p>'+size+'</p>'
                 result += '</div>'
                 result += '</li>'
                 result += '</a>'
@@ -269,9 +299,37 @@ def handle():
     if FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/Start").GetBool("UseStyleSheet",False):
         qssfile = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/MainWindow").GetString("StyleSheet","")
         if qssfile:
-            with open(qssfile, 'r') as f:
-                ALTCSS = encode(f.read())
-            HTML = HTML.replace("<!--QSS-->","<style type=\"text/css\">"+ALTCSS+"</style>")
+            # Search for stylesheet in user, system and resources locations
+            user = os.path.join(FreeCAD.getUserAppDataDir(), "Gui", "Stylesheets")
+            system = os.path.join(FreeCAD.getResourceDir(), "Gui", "Stylesheets")
+            resources = ":/stylesheets"
+
+            res = False
+            if QtCore.QFile.exists(os.path.join(user, qssfile)):
+                path = os.path.join(user, qssfile)
+            elif QtCore.QFile.exists(os.path.join(system, qssfile)):
+                path = os.path.join(system, qssfile)
+            elif QtCore.QFile.exists(os.path.join(resources, qssfile)):
+                res = True
+                path = os.path.join(resources, qssfile)
+            else:
+                path = None
+
+            if path:
+                if res:
+                    f = QtCore.QFile(path)
+                    if f.open(QtCore.QIODevice.ReadOnly | QtCore.QFile.Text):
+                        ALTCSS = encode(QtCore.QTextStream(f).readAll())
+                else:
+                    with open(path, 'r') as f:
+                        ALTCSS = encode(f.read())
+
+                HTML = HTML.replace("<!--QSS-->","<style type=\"text/css\">"+ALTCSS+"</style>")
+
+    # turn tips off if needed
+
+    if not FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/Start").GetBool("ShowTips",True):
+        HTML = HTML.replace("display: block; /* footnote tips display */","display: none; /* footnote tips display */")
 
     # get FreeCAD version
 
@@ -354,13 +412,17 @@ def handle():
             filename = os.path.join(cfolder,basename)
             SECTION_CUSTOM += encode(buildCard(filename,method="LoadCustom.py?filename="))
         SECTION_CUSTOM += "</ul>"
+        # hide the custom section tooltip if custom section is set (users know about it if they enabled it)
+        HTML = HTML.replace("id=\"customtip\"","id=\"customtip\" style=\"display:none;\"")
     HTML = HTML.replace("SECTION_CUSTOM",SECTION_CUSTOM)
 
-	# build IMAGE_SRC paths
+    # build IMAGE_SRC paths
+
     HTML = HTML.replace("IMAGE_SRC_USERHUB",'file:///'+os.path.join(resources_dir, 'images/userhub.png'))
     HTML = HTML.replace("IMAGE_SRC_POWERHUB",'file:///'+os.path.join(resources_dir, 'images/poweruserhub.png'))
     HTML = HTML.replace("IMAGE_SRC_DEVHUB",'file:///'+os.path.join(resources_dir, 'images/developerhub.png'))
     HTML = HTML.replace("IMAGE_SRC_MANUAL",'file:///'+os.path.join(resources_dir, 'images/manual.png'))
+    HTML = HTML.replace("IMAGE_SRC_SETTINGS",'file:///'+os.path.join(resources_dir, 'images/settings.png'))
     imagepath= 'file:///'+os.path.join(resources_dir, 'images/installed.png')
     imagepath = imagepath.replace('\\','/')  # replace Windows backslash with slash to make the path javascript compatible
     HTML = HTML.replace("IMAGE_SRC_INSTALLED",imagepath)
@@ -534,6 +596,8 @@ def postStart():
 
     # switch workbench
     wb = param.GetString("AutoloadModule","")
+    if "$LastModule" == wb:
+        wb = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/General").GetString("LastModule","")
     if wb:
         # don't switch workbenches if we are not in Start anymore
         if FreeCADGui.activeWorkbench() and (FreeCADGui.activeWorkbench().name() == "StartWorkbench"):

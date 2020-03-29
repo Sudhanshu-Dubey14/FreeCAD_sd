@@ -30,7 +30,7 @@ Q = App.Units.Quantity
 
 from AttachmentEditor.FrozenClass import FrozenClass
 try:
-    from Show.TempoVis import TempoVis
+    from Show import TempoVis
     from Show.DepGraphTools import getAllDependent
 except ImportError as err:
     def TempoVis(doc):
@@ -227,6 +227,17 @@ class AttachmentEditorTaskPanel(FrozenClass):
         self.form.setWindowIcon(QtGui.QIcon(':/icons/Part_Attachment.svg'))
         self.form.setWindowTitle(_translate('AttachmentEditor',"Attachment",None))
 
+        self.form.attachmentOffsetX.setProperty("unit", "mm")
+        self.form.attachmentOffsetY.setProperty("unit", "mm")
+        self.form.attachmentOffsetZ.setProperty("unit", "mm")
+        Gui.ExpressionBinding(self.form.attachmentOffsetX).bind(self.obj,"AttachmentOffset.Base.x")
+        Gui.ExpressionBinding(self.form.attachmentOffsetY).bind(self.obj,"AttachmentOffset.Base.y")
+        Gui.ExpressionBinding(self.form.attachmentOffsetZ).bind(self.obj,"AttachmentOffset.Base.z")
+
+        Gui.ExpressionBinding(self.form.attachmentOffsetYaw).bind(self.obj,"AttachmentOffset.Rotation.Yaw")
+        Gui.ExpressionBinding(self.form.attachmentOffsetPitch).bind(self.obj,"AttachmentOffset.Rotation.Pitch")
+        Gui.ExpressionBinding(self.form.attachmentOffsetRoll).bind(self.obj,"AttachmentOffset.Rotation.Roll")
+
         self.refLines = [self.form.lineRef1,
                          self.form.lineRef2,
                          self.form.lineRef3,
@@ -285,7 +296,7 @@ class AttachmentEditorTaskPanel(FrozenClass):
         self.updatePreview()
         self.updateRefButtons()
 
-        self.tv = TempoVis(self.obj.Document)
+        self.tv = TempoVis(self.obj.Document, tag= "PartGui.TaskAttachmentEditor")
         if self.tv: # tv will still be None if Show module is unavailable
             self.tv.hide_all_dependent(self.obj)
             self.tv.show(self.obj)
@@ -301,6 +312,9 @@ class AttachmentEditorTaskPanel(FrozenClass):
         if button == QtGui.QDialogButtonBox.Apply:
             if self.obj_is_attachable:
                 self.writeParameters()
+            if self.create_transaction:
+                self.obj.Document.commitTransaction()
+                self.obj.Document.openTransaction(_translate('AttachmentEditor',"Edit attachment of {feat}",None).format(feat= self.obj.Name))
             self.updatePreview()
             if self.callback_Apply:
                 self.callback_Apply()
@@ -434,12 +448,12 @@ class AttachmentEditorTaskPanel(FrozenClass):
         try:
             old_selfblock = self.block
             self.block = True
-            self.form.attachmentOffsetX.setText    ((plm.Base.x * mm).UserString)
-            self.form.attachmentOffsetY.setText    ((plm.Base.y * mm).UserString)
-            self.form.attachmentOffsetZ.setText    ((plm.Base.z * mm).UserString)
-            self.form.attachmentOffsetYaw.setText  ((plm.Rotation.toEuler()[0] * deg).UserString)
-            self.form.attachmentOffsetPitch.setText((plm.Rotation.toEuler()[1] * deg).UserString)
-            self.form.attachmentOffsetRoll.setText ((plm.Rotation.toEuler()[2] * deg).UserString)
+            self.form.attachmentOffsetX.lineEdit().setText    ((plm.Base.x * mm).UserString)
+            self.form.attachmentOffsetY.lineEdit().setText    ((plm.Base.y * mm).UserString)
+            self.form.attachmentOffsetZ.lineEdit().setText    ((plm.Base.z * mm).UserString)
+            self.form.attachmentOffsetYaw.lineEdit().setText  ((plm.Rotation.toEuler()[0] * deg).UserString)
+            self.form.attachmentOffsetPitch.lineEdit().setText((plm.Rotation.toEuler()[1] * deg).UserString)
+            self.form.attachmentOffsetRoll.lineEdit().setText ((plm.Rotation.toEuler()[2] * deg).UserString)
 
             self.form.checkBoxFlip.setChecked(self.attacher.Reverse)
 
@@ -591,7 +605,7 @@ class AttachmentEditorTaskPanel(FrozenClass):
             self.form.message.setText(_translate('AttachmentEditor',"Error: {err}",None).format(err= str(err)))
 
         if new_plm is not None:
-            self.form.groupBox_AttachmentOffset.setTitle(_translate('AttachmentEditor',"Attachment Offset:",None))
+            self.form.groupBox_AttachmentOffset.setTitle(_translate('AttachmentEditor',"Attachment Offset (in local coordinates):",None))
             self.form.groupBox_AttachmentOffset.setEnabled(True)
         else:
             self.form.groupBox_AttachmentOffset.setTitle(_translate('AttachmentEditor',"Attachment Offset (inactive - not attached):",None))

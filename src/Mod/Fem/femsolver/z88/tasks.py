@@ -1,6 +1,8 @@
 # ***************************************************************************
 # *   Copyright (c) 2017 Bernd Hahnebach <bernd@bimstatik.org>              *
 # *                                                                         *
+# *   This file is part of the FreeCAD CAx development system.              *
+# *                                                                         *
 # *   This program is free software; you can redistribute it and/or modify  *
 # *   it under the terms of the GNU Lesser General Public License (LGPL)    *
 # *   as published by the Free Software Foundation; either version 2 of     *
@@ -27,18 +29,17 @@ __url__ = "http://www.freecadweb.org"
 #  @{
 
 import os
-import subprocess
 import os.path
+import subprocess
 
 import FreeCAD
-if FreeCAD.GuiUp:
-    from PySide import QtGui
-import femtools.femutils as femutils
-import feminout.importZ88O2Results as importZ88O2Results
 
+from . import writer
 from .. import run
 from .. import settings
-from . import writer
+from feminout import importZ88O2Results
+from femtools import femutils
+from femtools import membertools
 
 
 class Check(run.Check):
@@ -53,17 +54,13 @@ class Prepare(run.Prepare):
 
     def run(self):
         self.pushStatus("Preparing input files...\n")
-        c = _Container(self.analysis)
         w = writer.FemInputWriterZ88(
-            self.analysis, self.solver, c.mesh, c.materials_linear,
-            c.materials_nonlinear, c.fixed_constraints,
-            c.displacement_constraints, c.contact_constraints,
-            c.planerotation_constraints, c.transform_constraints,
-            c.selfweight_constraints, c.force_constraints,
-            c.pressure_constraints, c.temperature_constraints,
-            c.heatflux_constraints, c.initialtemperature_constraints,
-            c.beam_sections, c.beam_rotations, c.shell_thicknesses, c.fluid_sections,
-            self.directory)
+            self.analysis,
+            self.solver,
+            membertools.get_mesh_to_solve(self.analysis)[0],  # pre check has been done already
+            membertools.AnalysisMember(self.analysis),
+            self.directory
+        )
         path = w.write_z88_input()
         # report to user if task succeeded
         if path is not None:
@@ -78,33 +75,34 @@ class Solve(run.Solve):
     def run(self):
         # AFAIK: z88r needs to be run twice, once in test mode and once in real solve mode
         # the subprocess was just copied, it seems to work :-)
-        # TODO: search out for "Vektor GS" and "Vektor KOI" and print values, may be compared with the used ones
+        # TODO: search out for "Vektor GS" and "Vektor KOI" and print values
+        # may be compared with the used ones
         self.pushStatus("Executing test solver...\n")
-        binary = settings.getBinary("Z88")
+        binary = settings.get_binary("Z88")
         self._process = subprocess.Popen(
             [binary, "-t", "-choly"],
             cwd=self.directory,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE)
         self.signalAbort.add(self._process.terminate)
-        output = self._observeSolver(self._process)
+        # output = self._observeSolver(self._process)
         self._process.communicate()
         self.signalAbort.remove(self._process.terminate)
 
         self.pushStatus("Executing real solver...\n")
-        binary = settings.getBinary("Z88")
+        binary = settings.get_binary("Z88")
         self._process = subprocess.Popen(
             [binary, "-c", "-choly"],
             cwd=self.directory,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE)
         self.signalAbort.add(self._process.terminate)
-        output = self._observeSolver(self._process)
+        # output = self._observeSolver(self._process)
         self._process.communicate()
         self.signalAbort.remove(self._process.terminate)
         # if not self.aborted:
         #     self._updateOutput(output)
-        del output   # get flake8 quiet
+        # del output   # get flake8 quiet
 
 
 class Results(run.Results):
@@ -117,60 +115,21 @@ class Results(run.Results):
         self.load_results_z88o2()
 
     def purge_results(self):
-        for m in femutils.get_member(self.analysis, "Fem::FemResultObject"):
-            if femutils.is_of_type(m.Mesh, "Fem::FemMeshResult"):
+        for m in membertools.get_member(self.analysis, "Fem::FemResultObject"):
+            if femutils.is_of_type(m.Mesh, "Fem::MeshResult"):
                 self.analysis.Document.removeObject(m.Mesh.Name)
             self.analysis.Document.removeObject(m.Name)
-        FreeCAD.ActiveDocument.recompute()
+        self.analysis.Document.recompute()
 
     def load_results_z88o2(self):
         disp_result_file = os.path.join(
-            self.directory, 'z88o2.txt')
+            self.directory, "z88o2.txt")
         if os.path.isfile(disp_result_file):
-            result_name_prefix = 'Z88_' + self.solver.AnalysisType + '_'
+            result_name_prefix = "Z88_" + self.solver.AnalysisType + "_"
             importZ88O2Results.import_z88_disp(
                 disp_result_file, self.analysis, result_name_prefix)
         else:
             raise Exception(
-                'FEM: No results found at {}!'.format(disp_result_file))
-
-
-class _Container(object):
-
-    def __init__(self, analysis):
-        self.analysis = analysis
-
-        # get mesh
-        mesh, message = femutils.get_mesh_to_solve(self.analysis)
-        if mesh is not None:
-            self.mesh = mesh
-        else:
-            if FreeCAD.GuiUp:
-                QtGui.QMessageBox.critical(None, "Missing prerequisite", message)
-            raise Exception(message + '\n')
-
-        # get member
-        self.materials_linear = self.get_several_member('Fem::Material')
-        self.fixed_constraints = self.get_several_member('Fem::ConstraintFixed')
-        self.force_constraints = self.get_several_member('Fem::ConstraintForce')
-        self.beam_sections = self.get_several_member('Fem::FemElementGeometry1D')
-        self.shell_thicknesses = self.get_several_member('Fem::FemElementGeometry2D')
-
-        # constraints not supported by z88
-        self.materials_nonlinear = []
-        self.selfweight_constraints = []
-        self.pressure_constraints = []
-        self.beam_rotations = []
-        self.fluid_sections = []
-        self.displacement_constraints = []
-        self.temperature_constraints = []
-        self.heatflux_constraints = []
-        self.initialtemperature_constraints = []
-        self.planerotation_constraints = []
-        self.contact_constraints = []
-        self.transform_constraints = []
-
-    def get_several_member(self, t):
-        return femutils.get_several_member(self.analysis, t)
+                "FEM: No results found at {}!".format(disp_result_file))
 
 ##  @}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sk" sourcelanguage="en">
+<TS version="2.1" language="sk" sourcelanguage="en">
   <context>
     <name>CmdRobotAddToolShape</name>
     <message>
@@ -29,12 +29,12 @@
     <message>
       <location filename="../../Command.cpp" line="159"/>
       <source>Place robot...</source>
-      <translation type="unfinished">Place robot...</translation>
+      <translation>Umiestniť robota...</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="160"/>
       <source>Place a robot (experimental!)</source>
-      <translation type="unfinished">Place a robot (experimental!)</translation>
+      <translation>Umiestniť robota (experimentálný!)</translation>
     </message>
   </context>
   <context>
@@ -47,7 +47,7 @@
     <message>
       <location filename="../../CommandTrajectory.cpp" line="63"/>
       <source>Create trajectory</source>
-      <translation type="unfinished">Create trajectory</translation>
+      <translation>Vytvorte trajektóriu</translation>
     </message>
     <message>
       <location filename="../../CommandTrajectory.cpp" line="64"/>
@@ -58,19 +58,19 @@
   <context>
     <name>CmdRobotEdge2Trac</name>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="321"/>
+      <location filename="../../CommandTrajectory.cpp" line="320"/>
       <source>Robot</source>
       <translation>Robot</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="322"/>
+      <location filename="../../CommandTrajectory.cpp" line="321"/>
       <source>Edge to Trajectory...</source>
       <translation type="unfinished">Edge to Trajectory...</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="323"/>
+      <location filename="../../CommandTrajectory.cpp" line="322"/>
       <source>Generate a Trajectory from a set of edges</source>
-      <translation type="unfinished">Generate a Trajectory from a set of edges</translation>
+      <translation>Vytvorte trajektóriu z množiny hrán</translation>
     </message>
   </context>
   <context>
@@ -196,7 +196,7 @@
     <message>
       <location filename="../../CommandTrajectory.cpp" line="97"/>
       <source>Insert robot Tool location into trajectory</source>
-      <translation type="unfinished">Insert robot Tool location into trajectory</translation>
+      <translation>Vložte polohu nástroja robota do trajektórie</translation>
     </message>
   </context>
   <context>
@@ -241,7 +241,7 @@
     <message>
       <location filename="../../CommandTrajectory.cpp" line="217"/>
       <source>Set default orientation</source>
-      <translation type="unfinished">Set default orientation</translation>
+      <translation>Použiť predvolenú orientáciu</translation>
     </message>
     <message>
       <location filename="../../CommandTrajectory.cpp" line="218"/>
@@ -252,17 +252,17 @@
   <context>
     <name>CmdRobotSetDefaultValues</name>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="255"/>
+      <location filename="../../CommandTrajectory.cpp" line="254"/>
       <source>Robot</source>
       <translation>Robot</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="256"/>
+      <location filename="../../CommandTrajectory.cpp" line="255"/>
       <source>Set default values</source>
-      <translation type="unfinished">Set default values</translation>
+      <translation>Nastaviť predvolené hodnoty</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="257"/>
+      <location filename="../../CommandTrajectory.cpp" line="256"/>
       <source>Set the default values for speed, acceleration and continuity for subsequent commands of waypoint creation</source>
       <translation type="unfinished">Set the default values for speed, acceleration and continuity for subsequent commands of waypoint creation</translation>
     </message>
@@ -278,7 +278,7 @@
       <location filename="../../Command.cpp" line="56"/>
       <location filename="../../Command.cpp" line="57"/>
       <source>Set the home position</source>
-      <translation type="unfinished">Set the home position</translation>
+      <translation>Nastavte východiskovú polohu</translation>
     </message>
   </context>
   <context>
@@ -291,28 +291,28 @@
     <message>
       <location filename="../../Command.cpp" line="200"/>
       <source>Simulate a trajectory</source>
-      <translation type="unfinished">Simulate a trajectory</translation>
+      <translation>Simulovať trajektóriu</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="201"/>
       <source>Run a simulation on a trajectory</source>
-      <translation type="unfinished">Run a simulation on a trajectory</translation>
+      <translation>Spustiť simuláciu na trajektórii</translation>
     </message>
   </context>
   <context>
     <name>CmdRobotTrajectoryCompound</name>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="432"/>
+      <location filename="../../CommandTrajectory.cpp" line="431"/>
       <source>Robot</source>
       <translation>Robot</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="433"/>
+      <location filename="../../CommandTrajectory.cpp" line="432"/>
       <source>Trajectory compound...</source>
       <translation type="unfinished">Trajectory compound...</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="434"/>
+      <location filename="../../CommandTrajectory.cpp" line="433"/>
       <source>Group and connect some trajectories to one</source>
       <translation type="unfinished">Group and connect some trajectories to one</translation>
     </message>
@@ -320,17 +320,17 @@
   <context>
     <name>CmdRobotTrajectoryDressUp</name>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="385"/>
+      <location filename="../../CommandTrajectory.cpp" line="384"/>
       <source>Robot</source>
       <translation>Robot</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="386"/>
+      <location filename="../../CommandTrajectory.cpp" line="385"/>
       <source>Dress-up trajectory...</source>
       <translation type="unfinished">Dress-up trajectory...</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="387"/>
+      <location filename="../../CommandTrajectory.cpp" line="386"/>
       <source>Create a dress-up object which overrides some aspects of a trajectory</source>
       <translation type="unfinished">Create a dress-up object which overrides some aspects of a trajectory</translation>
     </message>
@@ -366,7 +366,7 @@
       <location filename="../../CommandTrajectory.cpp" line="111"/>
       <location filename="../../CommandTrajectory.cpp" line="167"/>
       <location filename="../../CommandTrajectory.cpp" line="184"/>
-      <location filename="../../CommandTrajectory.cpp" line="413"/>
+      <location filename="../../CommandTrajectory.cpp" line="412"/>
       <source>Wrong selection</source>
       <translation>Chybný výber</translation>
     </message>
@@ -378,7 +378,7 @@
     <message>
       <location filename="../../Command.cpp" line="125"/>
       <source>Select one Robot</source>
-      <translation type="unfinished">Select one Robot</translation>
+      <translation>Vybrať jedného robota</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="225"/>
@@ -387,12 +387,12 @@
       <location filename="../../CommandExport.cpp" line="128"/>
       <location filename="../../CommandTrajectory.cpp" line="112"/>
       <source>Select one Robot and one Trajectory object.</source>
-      <translation type="unfinished">Select one Robot and one Trajectory object.</translation>
+      <translation>Vybrať jeden robot a jeden objekt trajektórie.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="230"/>
       <source>Trajectory not valid</source>
-      <translation type="unfinished">Trajectory not valid</translation>
+      <translation>Trajektória nie je platná</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="231"/>
@@ -439,37 +439,37 @@
       <translation type="unfinished">You have to hover above a geometry (Preselection) with the mouse to use this command. See documentation for details.</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="269"/>
+      <location filename="../../CommandTrajectory.cpp" line="268"/>
       <source>Set default speed</source>
       <translation type="unfinished">Set default speed</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="270"/>
+      <location filename="../../CommandTrajectory.cpp" line="269"/>
       <source>speed: (e.g. 1 m/s or 3 cm/s)</source>
       <translation type="unfinished">speed: (e.g. 1 m/s or 3 cm/s)</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="279"/>
+      <location filename="../../CommandTrajectory.cpp" line="278"/>
       <source>Set default continuity</source>
       <translation type="unfinished">Set default continuity</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="280"/>
+      <location filename="../../CommandTrajectory.cpp" line="279"/>
       <source>continuous ?</source>
       <translation type="unfinished">continuous ?</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="286"/>
+      <location filename="../../CommandTrajectory.cpp" line="285"/>
       <source>Set default acceleration</source>
       <translation type="unfinished">Set default acceleration</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="287"/>
+      <location filename="../../CommandTrajectory.cpp" line="286"/>
       <source>acceleration: (e.g. 1 m/s^2 or 3 cm/s^2)</source>
       <translation type="unfinished">acceleration: (e.g. 1 m/s^2 or 3 cm/s^2)</translation>
     </message>
     <message>
-      <location filename="../../CommandTrajectory.cpp" line="414"/>
+      <location filename="../../CommandTrajectory.cpp" line="413"/>
       <source>Select the Trajectory which you want to dress up.</source>
       <translation type="unfinished">Select the Trajectory which you want to dress up.</translation>
     </message>
@@ -875,27 +875,27 @@
       <source>World</source>
       <translation>Svet</translation>
     </message>
-    <message utf8="true">
+    <message>
       <location filename="../../TaskRobotControl.ui" line="287"/>
       <source>50mm / 5°</source>
       <translation>50mm / 5°</translation>
     </message>
-    <message utf8="true">
+    <message>
       <location filename="../../TaskRobotControl.ui" line="292"/>
       <source>20mm / 2°</source>
       <translation>20 mm / 2 °</translation>
     </message>
-    <message utf8="true">
+    <message>
       <location filename="../../TaskRobotControl.ui" line="297"/>
       <source>10mm / 1°</source>
       <translation>10 mm/1 °</translation>
     </message>
-    <message utf8="true">
+    <message>
       <location filename="../../TaskRobotControl.ui" line="302"/>
       <source>5mm / 0.5°</source>
       <translation>5 mm/0,5 °</translation>
     </message>
-    <message utf8="true">
+    <message>
       <location filename="../../TaskRobotControl.ui" line="307"/>
       <source>1mm / 0.1°</source>
       <translation>1 mm/0,1 °</translation>

@@ -62,6 +62,16 @@ StartGui::Workbench::~Workbench()
 
 void StartGui::Workbench::activated()
 {
+    // Automatically display the StartPage only the very first time
+    static bool first = true;
+    if (first) {
+        loadStartPage();
+        first = false;
+    }
+}
+
+void StartGui::Workbench::loadStartPage()
+{
     // Ensure that we don't open the Start page multiple times
     QString title = QCoreApplication::translate("Workbench", "Start page");
     QList<QWidget*> ch = Gui::getMainWindow()->windows();
@@ -131,7 +141,9 @@ Gui::ToolBarItem* StartGui::Workbench::setupToolBars() const
     // web navigation toolbar
     Gui::ToolBarItem* navigation = new Gui::ToolBarItem(root);
     navigation->setCommand("Navigation");
-    *navigation << "Web_OpenWebsite"
+    *navigation << "Web_BrowserSetURL"
+                << "Separator"
+                << "Web_OpenWebsite"
                 << "Start_StartPage"
                 << "Separator" 
                 << "Web_BrowserBack" 
@@ -156,6 +168,6 @@ Gui::DockWindowItems* StartGui::Workbench::setupDockWindows() const
 {
     Gui::DockWindowItems* root = Gui::StdWorkbench::setupDockWindows();
     root->setVisibility(false); // hide all dock windows by default
-    root->setVisibility("Std_CombiView",true); // except of the combi view
+    root->setVisibility("Std_ComboView",true); // except of the combo view
     return root;
 }

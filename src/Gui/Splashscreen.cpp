@@ -33,6 +33,7 @@
 # include <QMutex>
 # include <QTextBrowser>
 # include <QProcess>
+# include <QProcessEnvironment>
 # include <QSysInfo>
 # include <QTextStream>
 # include <QWaitCondition>
@@ -62,7 +63,7 @@ namespace Gui {
 /** Displays all messages at startup inside the splash screen.
  * \author Werner Mayer
  */
-class SplashObserver : public Base::ConsoleObserver
+class SplashObserver : public Base::ILogger
 {
 public:
     SplashObserver(QSplashScreen* splasher=0)
@@ -105,32 +106,19 @@ public:
     {
         Base::Console().DetachObserver(this);
     }
-    const char* Name()
+    const char* Name() override
     {
         return "SplashObserver";
     }
-    void Warning(const char * s)
+    void SendLog(const std::string& msg, Base::LogStyle level) override
     {
 #ifdef FC_DEBUG
-        Log(s);
+        Log(msg.c_str());
+        Q_UNUSED(level)
 #else
-        Q_UNUSED(s);
-#endif
-    }
-    void Message(const char * s)
-    {
-#ifdef FC_DEBUG
-        Log(s);
-#else
-        Q_UNUSED(s);
-#endif
-    }
-    void Error  (const char * s)
-    {
-#ifdef FC_DEBUG
-        Log(s);
-#else
-        Q_UNUSED(s);
+        if (level == Base::LogStyle::Log) {
+            Log(msg.c_str());
+        }
 #endif
     }
     void Log (const char * s)
@@ -280,6 +268,7 @@ AboutDialog::AboutDialog(bool showLic, QWidget* parent)
     ui->tabWidget->setCurrentIndex(0); // always start on the About tab
     setupLabels();
     showLicenseInformation();
+    showCollectionInformation();
 }
 
 /**
@@ -707,6 +696,23 @@ void AboutDialog::showLicenseInformation()
     connect(textField, SIGNAL(anchorClicked(QUrl)), this, SLOT(linkActivated(QUrl)));
 }
 
+void AboutDialog::showCollectionInformation()
+{
+    QString doc = QString::fromUtf8(App::Application::getHelpDir().c_str());
+    QString path = doc + QLatin1String("Collection.html");
+    if (!QFile::exists(path))
+        return;
+
+    QWidget *tab_collection = new QWidget();
+    tab_collection->setObjectName(QString::fromLatin1("tab_collection"));
+    ui->tabWidget->addTab(tab_collection, tr("Collection"));
+    QVBoxLayout* hlayout = new QVBoxLayout(tab_collection);
+    QTextBrowser* textField = new QTextBrowser(tab_collection);
+    textField->setOpenExternalLinks(true);
+    hlayout->addWidget(textField);
+    textField->setSource(path);
+}
+
 void AboutDialog::linkActivated(const QUrl& link)
 {
 //#if defined(Q_OS_WIN) && QT_VERSION < 0x050602
@@ -738,7 +744,26 @@ void AboutDialog::on_copyButton_clicked()
     QString major  = QString::fromLatin1(config["BuildVersionMajor"].c_str());
     QString minor  = QString::fromLatin1(config["BuildVersionMinor"].c_str());
     QString build  = QString::fromLatin1(config["BuildRevision"].c_str());
-    str << "OS: " << SystemInfo::getOperatingSystem() << endl;
+    
+    QString deskEnv = QProcessEnvironment::systemEnvironment().value(QString::fromLatin1("XDG_CURRENT_DESKTOP"),QString::fromLatin1(""));
+    QString deskSess = QProcessEnvironment::systemEnvironment().value(QString::fromLatin1("DESKTOP_SESSION"),QString::fromLatin1(""));
+    QString deskInfo = QString::fromLatin1("");
+    
+    if (!(deskEnv == QString::fromLatin1("") && deskSess == QString::fromLatin1("")))
+    {
+        if (deskEnv == QString::fromLatin1("") || deskSess == QString::fromLatin1(""))
+        {
+            deskInfo = QString::fromLatin1(" (") + deskEnv + deskSess + QString::fromLatin1(")");
+
+        }
+        else
+        {
+            deskInfo = QString::fromLatin1(" (") + deskEnv + QString::fromLatin1("/") + deskSess + QString::fromLatin1(")");
+        }
+    }
+    
+    str << "OS: " << SystemInfo::getOperatingSystem() << deskInfo << endl;
+    
     int wordSize = SystemInfo::getWordSizeOfOS();
     if (wordSize > 0) {
         str << "Word size of OS: " << wordSize << "-bit" << endl;

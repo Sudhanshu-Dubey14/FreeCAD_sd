@@ -24,7 +24,6 @@
 
 import FreeCAD
 import Part
-import Path
 import PathScripts.PathGeom as PathGeom
 import PathScripts.PathLog as PathLog
 import math
@@ -36,15 +35,12 @@ __author__ = "sliptonic (Brad Collette)"
 __url__ = "http://www.freecadweb.org"
 __doc__ = "Collection of functions used by various Path operations. The functions are specific to Path and the algorithms employed by Path's operations."
 
-if False:
-    PathLog.setLevel(PathLog.Level.DEBUG, PathLog.thisModule())
-    PathLog.trackModule(PathLog.thisModule())
-else:
-    PathLog.setLevel(PathLog.Level.INFO, PathLog.thisModule())
+PathLog.setLevel(PathLog.Level.INFO, PathLog.thisModule())
+#PathLog.trackModule(PathLog.thisModule())
 
 PrintWireDebug = False
 
-# Qt tanslation handling
+# Qt translation handling
 def translate(context, text, disambig=None):
     return QtCore.QCoreApplication.translate(context, text, disambig)
 
@@ -191,7 +187,7 @@ def offsetWire(wire, base, offset, forward):
             return Part.Wire([edge])
 
         # if we get to this point the assumption is that makeOffset2D can deal with the edge
-        pass
+        pass # pylint: disable=unnecessary-pass
 
     owire = orientWire(wire.makeOffset2D(offset), True)
     debugWire('makeOffset2D_%d' % len(wire.Edges), owire)
@@ -203,7 +199,7 @@ def offsetWire(wire, base, offset, forward):
         PathLog.track('closed - inside')
         try:
             owire = wire.makeOffset2D(-offset)
-        except:
+        except Exception: # pylint: disable=broad-except
             # most likely offsetting didn't work because the wire is a hole
             # and the offset is too big - making the hole vanish
             return None
@@ -216,7 +212,7 @@ def offsetWire(wire, base, offset, forward):
     # Of the remaining edges we take the longest wire to be the engraving side
     # Looking for a circle with the start vertex as center marks and end
     #  starting from there follow the edges until a circle with the end vertex as center is found
-    #  if the traversed edges include any oof the remainig from above, all those edges are remaining
+    #  if the traversed edges include any of the remaining from above, all those edges are remaining
     #  this is to also include edges which might partially be inside shape
     #  if they need to be discarded, split, that should happen in a post process
     # Depending on the Axis of the circle, and which side remains we know if the wire needs to be flipped

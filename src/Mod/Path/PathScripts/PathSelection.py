@@ -29,26 +29,28 @@ import PathScripts.PathLog as PathLog
 import PathScripts.PathUtils as PathUtils
 import math
 
-if False:
-    PathLog.setLevel(PathLog.Level.DEBUG, PathLog.thisModule())
-    PathLog.trackModule(PathLog.thisModule())
+PathLog.setLevel(PathLog.Level.INFO, PathLog.thisModule())
+#PathLog.trackModule(PathLog.thisModule())
 
+class PathBaseGate(object):
+    # pylint: disable=no-init
+    pass
 
-class EGate:
-    def allow(self, doc, obj, sub):
+class EGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
         return sub and sub[0:4] == 'Edge'
 
 
-class MESHGate:
-    def allow(self, doc, obj, sub):
+class MESHGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
         return obj.TypeId[0:4] == 'Mesh'
 
 
-class ENGRAVEGate:
-    def allow(self, doc, obj, sub):
+class ENGRAVEGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
         try:
             shape = obj.Shape
-        except:
+        except Exception: # pylint: disable=broad-except
             return False
 
         if math.fabs(shape.Volume) < 1e-9 and len(shape.Wires) > 0:
@@ -64,11 +66,11 @@ class ENGRAVEGate:
 
         return False
 
-class CHAMFERGate:
-    def allow(self, doc, obj, sub):
+class CHAMFERGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
         try:
             shape = obj.Shape
-        except:
+        except Exception: # pylint: disable=broad-except
             return False
 
         if math.fabs(shape.Volume) < 1e-9 and len(shape.Wires) > 0:
@@ -86,8 +88,8 @@ class CHAMFERGate:
         return False
 
 
-class DRILLGate:
-    def allow(self, doc, obj, sub):
+class DRILLGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
         PathLog.debug('obj: {} sub: {}'.format(obj, sub))
         if hasattr(obj, "Shape") and sub:
             shape = obj.Shape
@@ -97,13 +99,13 @@ class DRILLGate:
             return False
 
 
-class PROFILEGate:
-    def allow(self, doc, obj, sub):
+class PROFILEGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
 
         profileable = False
         try:
             obj = obj.Shape
-        except:
+        except Exception: # pylint: disable=broad-except
             return False
 
         if obj.ShapeType == 'Edge':
@@ -132,13 +134,13 @@ class PROFILEGate:
         return profileable
 
 
-class POCKETGate:
-    def allow(self, doc, obj, sub):
+class POCKETGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
 
         pocketable = False
         try:
             obj = obj.Shape
-        except:
+        except Exception: # pylint: disable=broad-except
             return False
 
         if obj.ShapeType == 'Edge':
@@ -157,18 +159,22 @@ class POCKETGate:
 
         return pocketable
 
-class ADAPTIVEGate:
-    def allow(self, doc, obj, sub):
+class ADAPTIVEGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
 
         adaptive = True
         try:
             obj = obj.Shape
-        except:
+        except Exception: # pylint: disable=broad-except
             return False
-            
+
         return adaptive
 
-class CONTOURGate:
+class CONTOURGate(PathBaseGate):
+    def allow(self, doc, obj, sub): # pylint: disable=unused-argument
+        pass
+
+class PROBEGate:
     def allow(self, doc, obj, sub):
         pass
 
@@ -205,8 +211,17 @@ def adaptiveselect():
     FreeCAD.Console.PrintWarning("Adaptive Select Mode\n")
 
 def surfaceselect():
-    FreeCADGui.Selection.addSelectionGate(MESHGate())
+    if(MESHGate() is True or PROFILEGate() is True):
+        FreeCADGui.Selection.addSelectionGate(True)
+    else:
+        FreeCADGui.Selection.addSelectionGate(False)
+    # FreeCADGui.Selection.addSelectionGate(MESHGate())
+    # FreeCADGui.Selection.addSelectionGate(PROFILEGate())  # Added for face selection
     FreeCAD.Console.PrintWarning("Surfacing Select Mode\n")
+
+def probeselect():
+    FreeCADGui.Selection.addSelectionGate(PROBEGate())
+    FreeCAD.Console.PrintWarning("Probe Select Mode\n")
 
 def select(op):
     opsel = {}
@@ -223,6 +238,7 @@ def select(op):
     opsel['Profile Faces'] = profileselect
     opsel['Surface'] = surfaceselect
     opsel['Adaptive'] = adaptiveselect
+    opsel['Probe'] = probeselect
     return opsel[op]
 
 def clear():

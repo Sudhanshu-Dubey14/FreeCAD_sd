@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="hu" sourcelanguage="en">
+<TS version="2.1" language="hu" sourcelanguage="en">
   <context>
     <name>AssemblyGui::TaskAssemblyConstraints</name>
     <message>
@@ -345,7 +345,7 @@
     <message>
       <location filename="../../TaskAssemblyConstraints.ui" line="413"/>
       <source>value</source>
-      <translation type="unfinished">value</translation>
+      <translation>érték</translation>
     </message>
     <message>
       <location filename="../../TaskAssemblyConstraints.ui" line="436"/>

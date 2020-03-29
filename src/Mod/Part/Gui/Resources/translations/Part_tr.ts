@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="tr" sourcelanguage="en">
+<TS version="2.1" language="tr" sourcelanguage="en">
   <context>
     <name>AttachmentEditor</name>
     <message>
@@ -94,6 +94,11 @@
       <translation>Hata: {err}</translation>
     </message>
     <message>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="594"/>
+      <source>Attachment Offset (in local coordinates):</source>
+      <translation type="unfinished">Attachment Offset (in local coordinates):</translation>
+    </message>
+    <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="595"/>
       <source>Attachment Offset:</source>
       <translation>Ek dosya Uzantısı:</translation>
@@ -132,11 +137,6 @@
       <translation>Öncelikle bileşik olan bir şekil seçin! İkinci seçilen öğe (isteğe bağlı) bir şablon olarak ele alınacaktır.</translation>
     </message>
     <message>
-      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="105"/>
-      <source>Bad selection</source>
-      <translation>Kötü seçim</translation>
-    </message>
-    <message>
       <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="103"/>
       <source>Computing the result failed with an error: 
 
@@ -148,6 +148,24 @@ Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</source>
 {err}
 
 Yine de özelliği oluşturmak için 'Devam Et'i tıklayın veya iptal etmek için' İptal et'i tıklayın.</translation>
+    </message>
+    <message>
+      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="105"/>
+      <source>Bad selection</source>
+      <translation>Kötü seçim</translation>
+    </message>
+    <message>
+      <location filename="../../../CompoundTools/_CommandCompoundFilter.py" line="106"/>
+      <source>Computing the result failed with an error: 
+
+{errstr}
+
+Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</source>
+      <translation type="unfinished">Computing the result failed with an error: 
+
+{errstr}
+
+Click 'Continue' to create the feature anyway, or 'Abort' to cancel.</translation>
     </message>
   </context>
   <context>
@@ -334,7 +352,7 @@ Yine de özelliği oluşturmak için 'Devam Et'i tıklayın veya iptal etmek iç
     <message>
       <location filename="../../../BOPTools/SplitFeatures.py" line="468"/>
       <source>Boolean XOR</source>
-      <translation>Boolean XOR</translation>
+      <translation>Mantıksal XOR</translation>
     </message>
     <message>
       <location filename="../../../BOPTools/SplitFeatures.py" line="470"/>
@@ -1950,7 +1968,7 @@ Yine de özelliği oluşturmak için 'Devam Et'i tıklayın veya iptal etmek iç
     <message>
       <location filename="../../Command.cpp" line="1049"/>
       <source>Exports to a CAD file</source>
-      <translation>Bir CAD dosyasına aktar</translation>
+      <translation>Bir CAD dosyasına aktarır</translation>
     </message>
   </context>
   <context>
@@ -2488,22 +2506,22 @@ Yine de özelliği oluşturmak için 'Devam Et'i tıklayın veya iptal etmek iç
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="210"/>
       <source>Yaw:</source>
-      <translation>rotadan çıkma: </translation>
+      <translation>Sapma Açısı (Z ekseninde):</translation>
     </message>
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="223"/>
       <source>Pitch:</source>
-      <translation>Saha:</translation>
+      <translation>Hatve (Aralık):</translation>
     </message>
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="236"/>
       <source>Roll:</source>
-      <translation>yuvarla(sar)</translation>
+      <translation>Yuvarla (X ekseninde):</translation>
     </message>
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="328"/>
       <source>Flip sides</source>
-      <translation>Yana çevir</translation>
+      <translation>Yönlerini çevirin</translation>
     </message>
   </context>
   <context>
@@ -2948,7 +2966,7 @@ Yine de özelliği oluşturmak için 'Devam Et'i tıklayın veya iptal etmek iç
     <message>
       <location filename="../../DlgFilletEdges.ui" line="142"/>
       <source>Radius:</source>
-      <translation>Yarıçapı:</translation>
+      <translation>Yarıçap:</translation>
     </message>
     <message>
       <location filename="../../DlgFilletEdges.cpp" line="265"/>
@@ -3292,7 +3310,7 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
     <message>
       <location filename="../../DlgPartCylinder.ui" line="128"/>
       <source>Radius:</source>
-      <translation>Yarıçapı:</translation>
+      <translation>Yarıçap:</translation>
     </message>
   </context>
   <context>
@@ -3331,7 +3349,7 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
     <message>
       <location filename="../../DlgPartImportStep.ui" line="14"/>
       <source>Step input file</source>
-      <translation>STEP giriş dosyası</translation>
+      <translation>Adım girdi dosyası</translation>
     </message>
     <message>
       <location filename="../../DlgPartImportStep.ui" line="20"/>
@@ -3499,7 +3517,7 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
       <location filename="../../DlgPrimitives.ui" line="1429"/>
       <location filename="../../DlgPrimitives.ui" line="1494"/>
       <source>Radius:</source>
-      <translation>Yarıçapı:</translation>
+      <translation>Yarıçap:</translation>
     </message>
     <message>
       <location filename="../../DlgPrimitives.ui" line="554"/>
@@ -3582,7 +3600,7 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
     <message>
       <location filename="../../DlgPrimitives.ui" line="1314"/>
       <source>Pitch:</source>
-      <translation>Saha:</translation>
+      <translation>Hatve (Aralık):</translation>
     </message>
     <message>
       <location filename="../../DlgPrimitives.ui" line="1335"/>
@@ -3672,7 +3690,7 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
       <location filename="../../DlgPrimitives.cpp" line="668"/>
       <location filename="../../DlgPrimitives.cpp" line="676"/>
       <source>Create %1</source>
-      <translation>%1 Oluşturmak</translation>
+      <translation>%1 Oluştur</translation>
     </message>
     <message>
       <location filename="../../DlgPrimitives.cpp" line="370"/>
@@ -3687,7 +3705,7 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
     <message>
       <location filename="../../DlgPrimitives.cpp" line="856"/>
       <source>&amp;Create</source>
-      <translation>&amp; Oluşturma</translation>
+      <translation>&amp;Oluştur</translation>
     </message>
   </context>
   <context>
@@ -3854,7 +3872,7 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
       <source>Maximum angular deflection</source>
       <translation>Maksimum açısal sapma</translation>
     </message>
-    <message utf8="true">
+    <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="107"/>
       <source> °</source>
       <translation> °</translation>
@@ -3885,12 +3903,12 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
     <message>
       <location filename="../../DlgSettingsGeneral.ui" line="26"/>
       <source>Automatically check model after boolean operation</source>
-      <translation>Boole işlemi sonrasında otomatik olarak model kontrolü</translation>
+      <translation>Mantıksal işlem sonrası, model otomatik kontrolü</translation>
     </message>
     <message>
       <location filename="../../DlgSettingsGeneral.ui" line="39"/>
       <source>Automatically refine model after boolean operation</source>
-      <translation>Boole işlemi sonrasında modeli otomatik olarak rafine etme</translation>
+      <translation>Mantıksal işlemden sonra modeli otomatik olarak iyileştir</translation>
     </message>
     <message>
       <location filename="../../DlgSettingsGeneral.ui" line="52"/>
@@ -4365,22 +4383,22 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
     <message>
       <location filename="../../TaskAttacher.ui" line="210"/>
       <source>Yaw:</source>
-      <translation>rotadan çıkma: </translation>
+      <translation>Sapma Açısı (Z ekseninde):</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.ui" line="223"/>
       <source>Pitch:</source>
-      <translation>Saha:</translation>
+      <translation>Hatve (Aralık):</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.ui" line="236"/>
       <source>Roll:</source>
-      <translation>yuvarla(sar)</translation>
+      <translation>Yuvarla (X ekseninde):</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.ui" line="328"/>
       <source>Flip sides</source>
-      <translation>Yana çevir</translation>
+      <translation>Yönlerini çevirin</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.cpp" line="302"/>
@@ -4405,7 +4423,7 @@ Lütfen önce bir veya daha fazla kenarlı varlıkları kontrol edin.</translati
     <message>
       <location filename="../../TaskAttacher.cpp" line="315"/>
       <source>Attached with mode %1</source>
-      <translation>% 1 modu ile eklendi</translation>
+      <translation>%1 modu ile ekli</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.cpp" line="319"/>
@@ -5254,7 +5272,7 @@ Devam etmek istiyor musun?</translation>
     <message>
       <location filename="../../Workbench.cpp" line="42"/>
       <source>Boolean</source>
-      <translation>Boolean</translation>
+      <translation>Mantıksal</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="43"/>
