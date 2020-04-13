@@ -55,6 +55,7 @@
         <file>icons/Draft_Offset.svg</file>
         <file>icons/Draft_PathArray.svg</file>
         <file>icons/Draft_PathLinkArray.svg</file>
+        <file>icons/Draft_PlaneProxy.svg</file>
         <file>icons/Draft_Point.svg</file>
         <file>icons/Draft_PointArray.svg</file>
         <file>icons/Draft_PolarArray.svg</file>
@@ -65,6 +66,7 @@
         <file>icons/Draft_SelectGroup.svg</file>
         <file>icons/Draft_SelectPlane.svg</file>
         <file>icons/Draft_ShapeString.svg</file>
+        <file>icons/Draft_ShapeString_tree.svg</file>
         <file>icons/Draft_Slope.svg</file>
         <file>icons/Draft_Snap.svg</file>
         <file>icons/Draft_Split.svg</file>
