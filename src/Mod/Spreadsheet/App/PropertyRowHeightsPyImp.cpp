@@ -1,7 +1,5 @@
- /**************************************************************************
- *   Copyright (c) 2015 FreeCAD Developers                                 *
- *   Author: WandererFan <wandererfan@gmail.com>                           *
- *   Based on src/Mod/FEM/Gui/DlgPrefsTechDraw4Imp.cpp                     *
+/***************************************************************************
+ *   Copyright (c) Eivind Kvedalen (eivind@kvedalen.name) 2015             *
  *                                                                         *
  *   This file is part of the FreeCAD CAx development system.              *
  *                                                                         *
@@ -23,28 +21,40 @@
  ***************************************************************************/
 
 
-#ifndef DRAWINGGUI_DLGPREFSTECHDRAWIMP4_H
-#define DRAWINGGUI_DLGPREFSTECHDRAWIMP4_H
+#include "PreCompiled.h"
 
-#include <Mod/TechDraw/Gui/ui_DlgPrefsTechDraw4.h>
-#include <Gui/PropertyPage.h>
+#include "PropertyRowHeights.h"
 
-namespace TechDrawGui {
+// inclusion of the generated files (generated out of PropertyRowHeightsPy.xml)
+#include "PropertyRowHeightsPy.h"
+#include "PropertyRowHeightsPy.cpp"
 
-class DlgPrefsTechDraw4Imp : public Gui::Dialog::PreferencePage, public Ui_DlgPrefsTechDraw4Imp
+using namespace Spreadsheet;
+
+// returns a string which represents the object e.g. when printed in python
+std::string PropertyRowHeightsPy::representation(void) const
 {
-    Q_OBJECT
+    return std::string("<PropertyRowHeights object>");
+}
 
-public:
-    DlgPrefsTechDraw4Imp( QWidget* parent = 0 );
-    ~DlgPrefsTechDraw4Imp();
+PyObject *PropertyRowHeightsPy::PyMake(struct _typeobject *, PyObject *, PyObject *)  // Python wrapper
+{
+    // create a new instance of PropertyRowHeightsPy and the Twin object 
+    return new PropertyRowHeightsPy(new PropertyRowHeights);
+}
 
-protected:
-    void saveSettings();
-    void loadSettings();
-    void changeEvent(QEvent *e);
-};
+// constructor method
+int PropertyRowHeightsPy::PyInit(PyObject* /*args*/, PyObject* /*kwd*/)
+{
+    return 0;
+}
 
-} // namespace TechDrawGui
+PyObject *PropertyRowHeightsPy::getCustomAttributes(const char* /*attr*/) const
+{
+    return 0;
+}
 
-#endif // DRAWINGGUI_DLGPREFSTECHDRAWIMP4_H
+int PropertyRowHeightsPy::setCustomAttributes(const char* /*attr*/, PyObject* /*obj*/)
+{
+    return 0; 
+}

@@ -1,7 +1,5 @@
- /**************************************************************************
- *   Copyright (c) 2015 FreeCAD Developers                                 *
- *   Author: WandererFan <wandererfan@gmail.com>                           *
- *   Based on src/Mod/FEM/Gui/DlgPrefsTechDraw1Imp.cpp                      *
+/***************************************************************************
+ *   Copyright (c) Eivind Kvedalen (eivind@kvedalen.name) 2015             *
  *                                                                         *
  *   This file is part of the FreeCAD CAx development system.              *
  *                                                                         *
@@ -23,28 +21,40 @@
  ***************************************************************************/
 
 
-#ifndef DRAWINGGUI_DLGPREFSTECHDRAWIMP1_H
-#define DRAWINGGUI_DLGPREFSTECHDRAWIMP1_H
+#include "PreCompiled.h"
 
-#include <Mod/TechDraw/Gui/ui_DlgPrefsTechDraw1.h>
-#include <Gui/PropertyPage.h>
+#include "PropertyColumnWidths.h"
 
-namespace TechDrawGui {
+// inclusion of the generated files (generated out of PropertyColumnWidthsPy.xml)
+#include "PropertyColumnWidthsPy.h"
+#include "PropertyColumnWidthsPy.cpp"
 
-class DlgPrefsTechDraw1Imp : public Gui::Dialog::PreferencePage, public Ui_DlgPrefsTechDraw1Imp
+using namespace Spreadsheet;
+
+// returns a string which represents the object e.g. when printed in python
+std::string PropertyColumnWidthsPy::representation(void) const
 {
-    Q_OBJECT
+    return std::string("<PropertyColumnWidths object>");
+}
 
-public:
-    DlgPrefsTechDraw1Imp( QWidget* parent = 0 );
-    ~DlgPrefsTechDraw1Imp();
+PyObject *PropertyColumnWidthsPy::PyMake(struct _typeobject *, PyObject *, PyObject *)  // Python wrapper
+{
+    // create a new instance of PropertyColumnWidthsPy and the Twin object 
+    return new PropertyColumnWidthsPy(new PropertyColumnWidths);
+}
 
-protected:
-    void saveSettings();
-    void loadSettings();
-    void changeEvent(QEvent *e);
-};
+// constructor method
+int PropertyColumnWidthsPy::PyInit(PyObject* /*args*/, PyObject* /*kwd*/)
+{
+    return 0;
+}
 
-} // namespace TechDrawGui
+PyObject *PropertyColumnWidthsPy::getCustomAttributes(const char* /*attr*/) const
+{
+    return 0;
+}
 
-#endif // DRAWINGGUI_DLGPREFSTECHDRAWIMP1_H
+int PropertyColumnWidthsPy::setCustomAttributes(const char* /*attr*/, PyObject* /*obj*/)
+{
+    return 0; 
+}

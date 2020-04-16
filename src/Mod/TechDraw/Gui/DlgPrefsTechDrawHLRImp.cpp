@@ -25,56 +25,54 @@
 
 #include "PreCompiled.h"
 
-#include "DlgPrefsTechDraw4Imp.h"
+#include "DlgPrefsTechDrawHLRImp.h"
 #include <Gui/PrefWidgets.h>
 
 using namespace TechDrawGui;
 
-DlgPrefsTechDraw4Imp::DlgPrefsTechDraw4Imp( QWidget* parent )
+DlgPrefsTechDrawHLRImp::DlgPrefsTechDrawHLRImp( QWidget* parent )
   : PreferencePage( parent )
 {
     this->setupUi(this);
 }
 
-DlgPrefsTechDraw4Imp::~DlgPrefsTechDraw4Imp()
+DlgPrefsTechDrawHLRImp::~DlgPrefsTechDrawHLRImp()
 {
     // no need to delete child widgets, Qt does it all for us
 }
 
-void DlgPrefsTechDraw4Imp::saveSettings()
+void DlgPrefsTechDrawHLRImp::saveSettings()
 {
-    cbEndCap->onSave();
-    cbCrazyEdges->onSave();
-    cbDebugSection->onSave();
-    cbDetectFaces->onSave();
-    cbDebugDetail->onSave();
-    cbShowSectionEdges->onSave();
-    cbFuseBeforeSection->onSave();
-    sbMaxTiles->onSave();
-    sbMaxPat->onSave();
-    cbShowLoose->onSave();
-    leFormatSpec->onSave();
+    pcbSeamViz->onSave();
+    pcbSmoothViz->onSave();
+    pcbHardViz->onSave();
+    pcbPolygon->onSave();
+    pcbIsoViz->onSave();
+    pcbSmoothHid->onSave();
+    pcbSeamHid->onSave();
+    pcbIsoHid->onSave();
+    psbIsoCount->onSave();
+    pcbHardHid->onSave();
 }
 
-void DlgPrefsTechDraw4Imp::loadSettings()
+void DlgPrefsTechDrawHLRImp::loadSettings()
 {
-    cbEndCap->onRestore();
-    cbCrazyEdges->onRestore();
-    cbDebugSection->onRestore();
-    cbDetectFaces->onRestore();
-    cbDebugDetail->onRestore();
-    cbShowSectionEdges->onRestore();
-    cbFuseBeforeSection->onRestore();
-    sbMaxTiles->onRestore();
-    sbMaxPat->onRestore();
-    cbShowLoose->onRestore();
-    leFormatSpec->onRestore();
+    pcbSeamViz->onRestore();
+    pcbSmoothViz->onRestore();
+    pcbHardViz->onRestore();
+    pcbPolygon->onRestore();
+    pcbIsoViz->onRestore();
+    pcbSmoothHid->onRestore();
+    pcbSeamHid->onRestore();
+    pcbIsoHid->onRestore();
+    psbIsoCount->onRestore();
+    pcbHardHid->onRestore();
 }
 
 /**
  * Sets the strings of the subwidgets using the current language.
  */
-void DlgPrefsTechDraw4Imp::changeEvent(QEvent *e)
+void DlgPrefsTechDrawHLRImp::changeEvent(QEvent *e)
 {
     if (e->type() == QEvent::LanguageChange) {
         saveSettings();
@@ -86,4 +84,4 @@ void DlgPrefsTechDraw4Imp::changeEvent(QEvent *e)
     }
 }
 
-#include <Mod/TechDraw/Gui/moc_DlgPrefsTechDraw4Imp.cpp>
+#include <Mod/TechDraw/Gui/moc_DlgPrefsTechDrawHLRImp.cpp>

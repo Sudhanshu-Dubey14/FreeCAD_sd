@@ -25,74 +25,56 @@
 
 #include "PreCompiled.h"
 
-#include "DlgPrefsTechDraw2Imp.h"
+#include "DlgPrefsTechDrawAdvancedImp.h"
 #include <Gui/PrefWidgets.h>
 
 using namespace TechDrawGui;
 
-DlgPrefsTechDraw2Imp::DlgPrefsTechDraw2Imp( QWidget* parent )
+DlgPrefsTechDrawAdvancedImp::DlgPrefsTechDrawAdvancedImp( QWidget* parent )
   : PreferencePage( parent )
 {
     this->setupUi(this);
-
-    this->pdsbTemplateMark->setUnit(Base::Unit::Length);
-    this->pdsbTemplateMark->setMinimum(0);
-
-    connect(this->cbViewScaleType, SIGNAL(currentIndexChanged(int)),
-        this, SLOT(onScaleTypeChanged(int)));
 }
 
-DlgPrefsTechDraw2Imp::~DlgPrefsTechDraw2Imp()
+DlgPrefsTechDrawAdvancedImp::~DlgPrefsTechDrawAdvancedImp()
 {
     // no need to delete child widgets, Qt does it all for us
 }
 
-void DlgPrefsTechDraw2Imp::onScaleTypeChanged(int index)
+void DlgPrefsTechDrawAdvancedImp::saveSettings()
 {
-    // disable custom scale if the scale type is not custom
-
-    if (index == 2) // if custom
-        this->pdsbViewScale->setEnabled(true);
-    else
-        this->pdsbViewScale->setEnabled(false);
+    cbEndCap->onSave();
+    cbCrazyEdges->onSave();
+    cbDebugSection->onSave();
+    cbDetectFaces->onSave();
+    cbDebugDetail->onSave();
+    cbShowSectionEdges->onSave();
+    cbFuseBeforeSection->onSave();
+    sbMaxTiles->onSave();
+    sbMaxPat->onSave();
+    cbShowLoose->onSave();
+    leFormatSpec->onSave();
 }
 
-void DlgPrefsTechDraw2Imp::saveSettings()
+void DlgPrefsTechDrawAdvancedImp::loadSettings()
 {
-    pdsbToleranceScale->onSave();
-    pdsbTemplateMark->onSave();
-    pdsbVertexScale->onSave();
-    pdsbCenterScale->onSave();
-    pdsbPageScale->onSave();
-    cbViewScaleType->onSave();
-    pdsbViewScale->onSave();
-    pdsbEdgeFuzz->onSave();
-    pdsbMarkFuzz->onSave();
-    pdsbTemplateMark->onSave();
-    pdsbSymbolScale->onSave();
-}
-
-void DlgPrefsTechDraw2Imp::loadSettings()
-{
-    double markDefault = 3.0;
-    pdsbTemplateMark->setValue(markDefault);
-    pdsbToleranceScale->onRestore();
-    pdsbTemplateMark->onRestore();
-    pdsbVertexScale->onRestore();
-    pdsbCenterScale->onRestore();
-    pdsbPageScale->onRestore();
-    cbViewScaleType->onRestore();
-    pdsbViewScale->onRestore();
-    pdsbEdgeFuzz->onRestore();
-    pdsbMarkFuzz->onRestore();
-    pdsbTemplateMark->onRestore();
-    pdsbSymbolScale->onRestore();
+    cbEndCap->onRestore();
+    cbCrazyEdges->onRestore();
+    cbDebugSection->onRestore();
+    cbDetectFaces->onRestore();
+    cbDebugDetail->onRestore();
+    cbShowSectionEdges->onRestore();
+    cbFuseBeforeSection->onRestore();
+    sbMaxTiles->onRestore();
+    sbMaxPat->onRestore();
+    cbShowLoose->onRestore();
+    leFormatSpec->onRestore();
 }
 
 /**
  * Sets the strings of the subwidgets using the current language.
  */
-void DlgPrefsTechDraw2Imp::changeEvent(QEvent *e)
+void DlgPrefsTechDrawAdvancedImp::changeEvent(QEvent *e)
 {
     if (e->type() == QEvent::LanguageChange) {
         saveSettings();
@@ -104,4 +86,4 @@ void DlgPrefsTechDraw2Imp::changeEvent(QEvent *e)
     }
 }
 
-#include <Mod/TechDraw/Gui/moc_DlgPrefsTechDraw2Imp.cpp>
+#include <Mod/TechDraw/Gui/moc_DlgPrefsTechDrawAdvancedImp.cpp>
