@@ -83,9 +83,28 @@ SET(Draft_view_providers
     draftviewproviders/README.md
 )
 
+SET(Creator_tools
+    draftguitools/gui_lines.py
+    draftguitools/gui_splines.py
+    draftguitools/gui_beziers.py
+    draftguitools/gui_rectangles.py
+    draftguitools/gui_arcs.py
+    draftguitools/gui_circles.py
+    draftguitools/gui_polygons.py
+    draftguitools/gui_ellipses.py
+    draftguitools/gui_texts.py
+    draftguitools/gui_dimensions.py
+    draftguitools/gui_shapestrings.py
+    draftguitools/gui_points.py
+    draftguitools/gui_facebinders.py
+    draftguitools/gui_labels.py
+)
+
 SET(Draft_GUI_tools
     draftguitools/__init__.py
     draftguitools/gui_base.py
+    draftguitools/gui_base_original.py
+    draftguitools/gui_tool_utils.py
     draftguitools/gui_circulararray.py
     draftguitools/gui_orthoarray.py
     draftguitools/gui_polararray.py
@@ -103,7 +122,7 @@ SET(Draft_GUI_tools
     draftguitools/gui_heal.py
     draftguitools/gui_dimension_ops.py
     draftguitools/gui_lineslope.py
-    draftguitools/gui_arcs.py
+    ${Creator_tools}
     draftguitools/README.md
 )
 
