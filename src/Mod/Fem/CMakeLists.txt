@@ -52,6 +52,7 @@ SET(FemExamples_SRCS
     femexamples/constraint_contact_solid_solid.py
     femexamples/constraint_section_print.py
     femexamples/constraint_tie.py
+    femexamples/constraint_transform_torque.py
     femexamples/examplesgui.py
     femexamples/manager.py
     femexamples/material_multiple_twoboxes.py
@@ -77,6 +78,7 @@ SET(FemExampleMeshes_SRCS
     femexamples/meshes/mesh_thermomech_bimetall_tetra10.py
     femexamples/meshes/mesh_thermomech_flow1d_seg3.py
     femexamples/meshes/mesh_thermomech_spine_tetra10.py
+    femexamples/meshes/mesh_transform_torque_tetra10.py
 )
 
 SET(FemInOut_SRCS
