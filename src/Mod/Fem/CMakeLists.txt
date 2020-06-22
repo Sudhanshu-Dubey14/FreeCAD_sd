@@ -243,6 +243,8 @@ SET(FemTestsCcx_SRCS
     femtest/data/calculix/constraint_contact_solid_solid.inp
     femtest/data/calculix/constraint_sectionprint.inp
     femtest/data/calculix/constraint_tie.inp
+    femtest/data/calculix/constraint_transform_beam_hinged.inp
+    femtest/data/calculix/constraint_transform_torque.inp
     femtest/data/calculix/material_multiple.inp
     femtest/data/calculix/material_nonlinear.inp
     femtest/data/calculix/thermomech_bimetall.inp
