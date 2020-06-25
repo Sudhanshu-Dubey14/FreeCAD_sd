@@ -43,8 +43,7 @@ def init_doc(doc=None):
 
 
 def get_information():
-    info = {
-            "name": "Multibody Analysis",
+    info = {"name": "Multibody Analysis",
             "meshtype": "solid",
             "meshelement": "Tet10",
             "constraints": ["fixed", "force"],
@@ -133,8 +132,7 @@ def setup(doc=None, solvertype="ccxtools"):
     # material
     # material1
     material_object1 = analysis.addObject(
-            ObjectsFem.makeMaterialSolid(doc, 'FemMaterial1')
-            )[0]
+        ObjectsFem.makeMaterialSolid(doc, 'FemMaterial1'))[0]
     material_object1.References = [(doc.Box3, "Solid1")]
     mat = material_object1.Material
     mat['Name'] = "Concrete-Generic"
@@ -145,8 +143,7 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # material2
     material_object2 = analysis.addObject(
-            ObjectsFem.makeMaterialSolid(doc, 'FemMaterial2')
-            )[0]
+        ObjectsFem.makeMaterialSolid(doc, 'FemMaterial2'))[0]
     material_object2.References = [(doc.Box2, "Solid1"), (doc.Box4, "Solid1")]
     mat = material_object2.Material
     mat['Name'] = "PLA"
@@ -157,8 +154,7 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # material3
     material_object3 = analysis.addObject(
-            ObjectsFem.makeMaterialSolid(doc, 'FemMaterial3')
-            )[0]
+        ObjectsFem.makeMaterialSolid(doc, 'FemMaterial3'))[0]
     material_object3.References = []
     mat = material_object3.Material
     mat['Name'] = "Steel-Generic"
@@ -175,15 +171,15 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # force_constraint
     force_constraint = analysis.addObject(
-            ObjectsFem.makeConstraintForce(doc, name="ConstraintForce")
-            )[0]
+        ObjectsFem.makeConstraintForce(doc, name="ConstraintForce")
+    )[0]
     force_constraint.References = [
-            (doc.Box1, "Face6"),
-            (doc.Box2, "Face6"),
-            (doc.Box3, "Face6"),
-            (doc.Box4, "Face6"),
-            (doc.Box5, "Face6")
-            ]
+        (doc.Box1, "Face6"),
+        (doc.Box2, "Face6"),
+        (doc.Box3, "Face6"),
+        (doc.Box4, "Face6"),
+        (doc.Box5, "Face6")
+    ]
     force_constraint.Force = 10000.00
     force_constraint.Direction = (doc.Box1, ["Edge1"])
     force_constraint.Reversed = True

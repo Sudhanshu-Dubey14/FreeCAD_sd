@@ -23,7 +23,8 @@
 
 # to run the example use:
 """
-
+from femexamples.edge_load_calculation import setup
+setup()
 """
 
 import FreeCAD
@@ -43,8 +44,7 @@ def init_doc(doc=None):
 
 
 def get_information():
-    info = {
-            "name": "Edge Load Calculation",
+    info = {"name": "Edge Load Calculation",
             "meshtype": "solid",
             "meshelement": "Tria6",
             "constraints": ["force", "fixed"],
@@ -121,19 +121,16 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # fixed_constraint
     fixed_constraint = analysis.addObject(
-            ObjectsFem.makeConstraintFixed(doc, name="ConstraintFixed")
-            )[0]
+        ObjectsFem.makeConstraintFixed(doc, name="ConstraintFixed"))[0]
     fixed_constraint.References = [
-            (doc.SquareTube, "Edge4"),
-            (doc.SquareTube, "Edge7"),
-            (doc.SquareTube, "Edge10"),
-            (doc.SquareTube, "Edge12")
-            ]
+        (doc.SquareTube, "Edge4"),
+        (doc.SquareTube, "Edge7"),
+        (doc.SquareTube, "Edge10"),
+        (doc.SquareTube, "Edge12")]
 
     # force_constraint1
     force_constraint1 = analysis.addObject(
-            ObjectsFem.makeConstraintForce(doc, name="ConstraintForce1")
-            )[0]
+        ObjectsFem.makeConstraintForce(doc, name="ConstraintForce1"))[0]
     force_constraint1.References = [(doc.SquareTube, "Edge9")]
     force_constraint1.Force = 100000.00
     force_constraint1.Direction = (doc.SquareTube, ["Edge9"])
@@ -141,8 +138,7 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # force_constraint2
     force_constraint2 = analysis.addObject(
-            ObjectsFem.makeConstraintForce(doc, name="ConstraintForce2")
-            )[0]
+        ObjectsFem.makeConstraintForce(doc, name="ConstraintForce2"))[0]
     force_constraint2.References = [(doc.SquareTube, "Edge3")]
     force_constraint2.Force = 100000.00
     force_constraint2.Direction = (doc.SquareTube, ["Edge3"])
@@ -150,8 +146,7 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # force_constraint3
     force_constraint3 = analysis.addObject(
-            ObjectsFem.makeConstraintForce(doc, name="ConstraintForce3")
-            )[0]
+        ObjectsFem.makeConstraintForce(doc, name="ConstraintForce3"))[0]
     force_constraint3.References = [(doc.SquareTube, "Edge1")]
     force_constraint3.Force = 100000.00
     force_constraint3.Direction = (doc.SquareTube, ["Edge11"])
@@ -159,8 +154,7 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # force_constraint4
     force_constraint4 = analysis.addObject(
-            ObjectsFem.makeConstraintForce(doc, name="ConstraintForce4")
-            )[0]
+        ObjectsFem.makeConstraintForce(doc, name="ConstraintForce4"))[0]
     force_constraint4.References = [(doc.SquareTube, "Edge6")]
     force_constraint4.Force = 100000.00
     force_constraint4.Direction = (doc.SquareTube, ["Edge6"])

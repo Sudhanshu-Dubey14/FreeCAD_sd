@@ -42,8 +42,7 @@ def init_doc(doc=None):
 
 
 def get_information():
-    info = {
-            "name": "Multibody Face Analysis",
+    info = {"name": "Multibody Face Analysis",
             "meshtype": "solid",
             "meshelement": "Tria6",
             "constraints": ["fixed", "force"],
@@ -124,14 +123,14 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # shell thickness
     analysis.addObject(
-            ObjectsFem.makeElementGeometry2D(doc, 10, 'ShellThickness')
-            )
+        ObjectsFem.makeElementGeometry2D(doc, 10, 'ShellThickness')
+    )
 
     # materials
     # material1
     material_object1 = analysis.addObject(
-            ObjectsFem.makeMaterialSolid(doc, 'FemMaterial1')
-            )[0]
+        ObjectsFem.makeMaterialSolid(doc, 'FemMaterial1')
+    )[0]
     material_object1.References = [(doc.Face3, "Face1")]
     mat = material_object1.Material
     mat['Name'] = "Concrete-Generic"
@@ -142,12 +141,12 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # material2
     material_object2 = analysis.addObject(
-            ObjectsFem.makeMaterialSolid(doc, 'FemMaterial2')
-            )[0]
+        ObjectsFem.makeMaterialSolid(doc, 'FemMaterial2')
+    )[0]
     material_object2.References = [
-            (doc.Face2, "Face1"),
-            (doc.Face4, "Face1")
-            ]
+        (doc.Face2, "Face1"),
+        (doc.Face4, "Face1")
+    ]
     mat = material_object2.Material
     mat['Name'] = "PLA"
     mat['YoungsModulus'] = "3640 MPa"
@@ -157,8 +156,8 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # material3
     material_object3 = analysis.addObject(
-            ObjectsFem.makeMaterialSolid(doc, 'FemMaterial3')
-            )[0]
+        ObjectsFem.makeMaterialSolid(doc, 'FemMaterial3')
+    )[0]
     material_object3.References = []
     mat = material_object3.Material
     mat['Name'] = "Steel-Generic"
@@ -169,24 +168,24 @@ def setup(doc=None, solvertype="ccxtools"):
 
     # fixed_constraint
     fixed_constraint = analysis.addObject(
-            ObjectsFem.makeConstraintFixed(doc, name="ConstraintFixed")
-            )[0]
+        ObjectsFem.makeConstraintFixed(doc, name="ConstraintFixed")
+    )[0]
     fixed_constraint.References = [
-            (doc.Face1, "Edge1"),
-            (doc.Face5, "Edge3")
-            ]
+        (doc.Face1, "Edge1"),
+        (doc.Face5, "Edge3")
+    ]
 
     # force_constraint
     force_constraint = analysis.addObject(
-            ObjectsFem.makeConstraintForce(doc, name="ConstraintForce")
-            )[0]
+        ObjectsFem.makeConstraintForce(doc, name="ConstraintForce")
+    )[0]
     force_constraint.References = [
-            (doc.Face1, "Edge4"),
-            (doc.Face2, "Edge4"),
-            (doc.Face3, "Edge4"),
-            (doc.Face4, "Edge4"),
-            (doc.Face5, "Edge4")
-            ]
+        (doc.Face1, "Edge4"),
+        (doc.Face2, "Edge4"),
+        (doc.Face3, "Edge4"),
+        (doc.Face4, "Edge4"),
+        (doc.Face5, "Edge4")
+    ]
     force_constraint.Force = 10000.00
     force_constraint.Direction = (doc.Face1, ["Edge1"])
     force_constraint.Reversed = True

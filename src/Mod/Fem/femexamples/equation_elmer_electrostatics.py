@@ -49,8 +49,7 @@ def init_doc(doc=None):
 
 
 def get_information():
-    info = {
-            "name": "Equation Elmer Electrostatics",
+    info = {"name": "Equation Elmer Electrostatics",
             "meshtype": "solid",
             "meshelement": "Tet10",
             "constraints": ["electrostaticPotential"],
@@ -74,11 +73,10 @@ def setup(doc=None, solvertype="elmer"):
     base_sketch.Support = (doc.getObject('XY_Plane'), [''])
     base_sketch.MapMode = 'FlatFace'
     base_geoList = [
-        Part.LineSegment(Vector(0.000000,  0.000000, 0), Vector(57.407921, 0.000000, 0)),
-        Part.LineSegment(Vector(57.407921,  0.000000, 0), Vector(57.407921, 35.205284, 0)),
-        Part.LineSegment(Vector(57.407921,  35.205284, 0), Vector(0.000000, 35.205284, 0)),
-        Part.LineSegment(Vector(0.000000, 35.205284, 0), Vector(0.000000, 0.000000, 0))
-        ]
+        Part.LineSegment(Vector(0.000000, 0.000000, 0), Vector(57.407921, 0.000000, 0)),
+        Part.LineSegment(Vector(57.407921, 0.000000, 0), Vector(57.407921, 35.205284, 0)),
+        Part.LineSegment(Vector(57.407921, 35.205284, 0), Vector(0.000000, 35.205284, 0)),
+        Part.LineSegment(Vector(0.000000, 35.205284, 0), Vector(0.000000, 0.000000, 0))]
     base_sketch.addGeometry(base_geoList, False)
     base_conList = [
         Sketcher.Constraint('Coincident', 0, 2, 1, 1),
@@ -91,8 +89,7 @@ def setup(doc=None, solvertype="elmer"):
         Sketcher.Constraint('Vertical', 3),
         Sketcher.Constraint('Coincident', 0, 1, -1, 1),
         Sketcher.Constraint('DistanceY', 1, 1, 1, 2, 35.205284),
-        Sketcher.Constraint('DistanceX', 0, 1, 0, 2, 57.407921)
-        ]
+        Sketcher.Constraint('DistanceX', 0, 1, 0, 2, 57.407921)]
     base_sketch.addConstraint(base_conList)
     base_sketch.setDatum(9, Units.Quantity('5000.000000 mm'))
     base_sketch.setDatum(10, Units.Quantity('5000.000000 mm'))
@@ -112,9 +109,8 @@ def setup(doc=None, solvertype="elmer"):
         Part.LineSegment(Vector(5037.082520, 0.000000, 0), Vector(1309.763672, -21.422216, 0)),
         Part.LineSegment(Vector(1309.763672, 0.000000, 0), Vector(1372.406982, 1544.678467, 0)),
         Part.LineSegment(Vector(1372.406982, 1544.678467, 0), Vector(-37.083382, 1544.678467, 0)),
-        Part.LineSegment(Vector(0.000000, 1544.678467, 0), Vector(25.560951, 4958.778320, 0))
-        ]
-    upper_sketch.addGeometry(upper_geoList,  False)
+        Part.LineSegment(Vector(0.000000, 1544.678467, 0), Vector(25.560951, 4958.778320, 0))]
+    upper_sketch.addGeometry(upper_geoList, False)
     upper_conList = [
         Sketcher.Constraint('Horizontal', 0),
         Sketcher.Constraint('Coincident', 1, 1, 0, 2),
@@ -133,8 +129,7 @@ def setup(doc=None, solvertype="elmer"):
         Sketcher.Constraint('DistanceX', 0, 1, 0, 2, 5037.082520),
         Sketcher.Constraint('DistanceY', 1, 2, 1, 1, 4958.778320),
         Sketcher.Constraint('DistanceY', 3, 1, 3, 2, 1544.678467),
-        Sketcher.Constraint('DistanceX', 4, 2, 4, 1, 1309.763672)
-        ]
+        Sketcher.Constraint('DistanceX', 4, 2, 4, 1, 1309.763672)]
     upper_sketch.addConstraint(upper_conList)
     upper_sketch.setDatum(14, Units.Quantity('5000.000000 mm'))
     upper_sketch.setDatum(15, Units.Quantity('5000.000000 mm'))
@@ -191,8 +186,7 @@ def setup(doc=None, solvertype="elmer"):
 
     # 0V_potential_constraint
     constraint_elect_pot0 = analysis.addObject(
-            ObjectsFem.makeConstraintElectrostaticPotential(doc)
-            )[0]
+        ObjectsFem.makeConstraintElectrostaticPotential(doc))[0]
     constraint_elect_pot0.References = [(doc.Pocket, "Face2")]
     constraint_elect_pot0.Potential = 0.00
     constraint_elect_pot0.CapacitanceBody = 1
@@ -201,8 +195,7 @@ def setup(doc=None, solvertype="elmer"):
 
     # 1e6V_potential_constraint
     constraint_elect_pot1 = analysis.addObject(
-            ObjectsFem.makeConstraintElectrostaticPotential(doc)
-            )[0]
+        ObjectsFem.makeConstraintElectrostaticPotential(doc))[0]
     constraint_elect_pot1.References = [(doc.Pocket, "Face7")]
     constraint_elect_pot1.Potential = 1000000.00
     constraint_elect_pot1.CapacitanceBody = 2

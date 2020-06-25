@@ -49,8 +49,7 @@ def init_doc(doc=None):
 
 
 def get_information():
-    info = {
-            "name": "Constraint Transform Torque",
+    info = {"name": "Constraint Transform Torque",
             "meshtype": "solid",
             "meshelement": "Tet10",
             "constraints": ["fixed", "force", "transform"],
