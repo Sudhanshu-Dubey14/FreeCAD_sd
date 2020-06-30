@@ -24,8 +24,8 @@
 
 # to run the example use:
 """
-from femexamples import constraint_transform_torque as torque
-torque.setup()
+from femexamples.constraint_transform_torque import setup()
+setup()
 
 """
 
