@@ -199,6 +199,14 @@ class TestSolverCalculix(unittest.TestCase):
         self.input_file_writing_test(get_namefromdef("test_"))
 
     # ********************************************************************************************
+    def test_multibody_analysis(
+        self
+    ):
+        from femexamples.multibody_analysis import setup
+        setup(self.document, "calculix")
+        self.input_file_writing_test(get_namefromdef("test_"))
+
+    # ********************************************************************************************
     def test_thermomech_bimetall(
         self
     ):

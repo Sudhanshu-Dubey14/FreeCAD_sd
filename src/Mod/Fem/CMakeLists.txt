@@ -251,6 +251,7 @@ SET(FemTestsCcx_SRCS
     femtest/data/calculix/constraint_transform_torque.inp
     femtest/data/calculix/material_multiple.inp
     femtest/data/calculix/material_nonlinear.inp
+    femtest/data/calculix/multibody_analysis.inp
     femtest/data/calculix/thermomech_bimetall.inp
     femtest/data/calculix/thermomech_flow1D.inp
     femtest/data/calculix/thermomech_flow1D.dat
