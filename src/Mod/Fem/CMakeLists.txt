@@ -251,6 +251,7 @@ SET(FemTestsCcx_SRCS
     femtest/data/calculix/constraint_tie.inp
     femtest/data/calculix/constraint_transform_beam_hinged.inp
     femtest/data/calculix/constraint_transform_torque.inp
+    femtest/data/calculix/edge_load_calculation.inp
     femtest/data/calculix/material_multiple.inp
     femtest/data/calculix/material_nonlinear.inp
     femtest/data/calculix/multibody_analysis.inp

@@ -183,6 +183,14 @@ class TestSolverCalculix(unittest.TestCase):
         self.input_file_writing_test(get_namefromdef("test_"))
 
     # ********************************************************************************************
+    def test_edge_load_calculation(
+        self
+    ):
+        from femexamples.edge_load_calculation import setup
+        setup(self.document, "calculix")
+        self.input_file_writing_test(get_namefromdef("test_"))
+
+    # ********************************************************************************************
     def test_material_multiple(
         self
     ):
