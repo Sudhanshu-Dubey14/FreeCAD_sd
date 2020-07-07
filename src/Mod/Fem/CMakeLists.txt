@@ -222,6 +222,7 @@ SET(FemTestsApp_SRCS
     femtest/app/test_result.py
     femtest/app/test_solver_calculix.py
     femtest/app/test_solver_elmer.py
+    femtest/app/test_solver_z88.py
 )
 
 SET(FemTestsFiles_SRCS
@@ -296,6 +297,19 @@ SET(FemTestsOpen_SRCS
     femtest/data/open/all_objects_de9b3fb438.FCStd
 )
 
+SET(FemTestsZ88_SRCS
+    femtest/data/z88/__init__.py
+    femtest/data/z88/cube_static/51.txt
+    femtest/data/z88/cube_static/z88.dyn
+    femtest/data/z88/cube_static/z88elp.txt
+    femtest/data/z88/cube_static/z88i1.txt
+    femtest/data/z88/cube_static/z88i2.txt
+    femtest/data/z88/cube_static/z88i5.txt
+    femtest/data/z88/cube_static/z88int.txt
+    femtest/data/z88/cube_static/z88man.txt
+    femtest/data/z88/cube_static/z88mat.txt
+)
+
 SET(FemTools_SRCS
     femtools/__init__.py
     femtools/ccxtools.py
@@ -331,6 +345,7 @@ SET(FemAllScripts
     ${FemTestsElmer_SRCS}
     ${FemTestsMesh_SRCS}
     ${FemTestsOpen_SRCS}
+    ${FemTestsZ88_SRCS}
     ${FemTools_SRCS}
 )
 
@@ -363,6 +378,7 @@ INSTALL(FILES ${FemTestsCcx_SRCS} DESTINATION Mod/Fem/femtest/data/calculix)
 INSTALL(FILES ${FemTestsElmer_SRCS} DESTINATION Mod/Fem/femtest/data/elmer)
 INSTALL(FILES ${FemTestsMesh_SRCS} DESTINATION Mod/Fem/femtest/data/mesh)
 INSTALL(FILES ${FemTestsOpen_SRCS} DESTINATION Mod/Fem/femtest/data/open)
+INSTALL(FILES ${FemTestsZ88_SRCS} DESTINATION Mod/Fem/femtest/data/z88)
 INSTALL(FILES ${FemTools_SRCS} DESTINATION Mod/Fem/femtools)
 
 
