@@ -23,8 +23,8 @@
 
 # to run the example use:
 """
-from femexamples import constraint_transform_beam_hinged as hinged_beam
-hinged_beam.setup()
+from femexamples.constraint_transform_beam_hinged import setup
+setup()
 
 """
 # Constraint transform on a beam
@@ -147,12 +147,12 @@ def setup(doc=None, solvertype="ccxtools"):
         ObjectsFem.makeConstraintDisplacement(doc, name="FemConstraintDisplacment")
     )[0]
     displacement_constraint.References = [(geom_obj, "Face7"), (geom_obj, "Face12")]
-    # displacement_constraint.xDisplacement = 0.000000
-    # displacement_constraint.yDisplacement = 0.000000
-    # displacement_constraint.zDisplacement = 0.000000
-    # displacement_constraint.xRotation = 0.000000
-    # displacement_constraint.yRotation = 0.000000
-    # displacement_constraint.zRotation = 0.000000
+    # displacement_constraint.xDisplacement = 0.0
+    # displacement_constraint.yDisplacement = 0.0
+    # displacement_constraint.zDisplacement = 0.0
+    # displacement_constraint.xRotation = 0.0
+    # displacement_constraint.yRotation = 0.0
+    # displacement_constraint.zRotation = 0.0
     displacement_constraint.xFree = False
     displacement_constraint.xFix = True
     # displacement_constraint.yFree = True
@@ -192,4 +192,5 @@ def setup(doc=None, solvertype="ccxtools"):
     femmesh_obj.Part = geom_obj
     femmesh_obj.SecondOrderLinear = False
 
+    doc.recompute()
     return doc
