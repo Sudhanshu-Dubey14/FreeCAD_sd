@@ -65,6 +65,15 @@ def setup(doc=None, solvertype="ccxtools"):
     if doc is None:
         doc = init_doc()
 
+    # line for load direction
+    sh_load_line = makeLine(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 10, 0))
+    load_line = doc.addObject("Part::Feature", "Load_direction_line")
+    load_line.Shape = sh_load_line
+    doc.recompute()
+    if FreeCAD.GuiUp:
+        load_line.ViewObject.LineWidth = 5.0
+        load_line.ViewObject.LineColor = (1.0, 0.0, 0.0)
+
     # geometry object
     # name is important because the other method in this module use obj name
     cylinder1 = doc.addObject("Part::Cylinder", "Cylinder1")
@@ -78,18 +87,9 @@ def setup(doc=None, solvertype="ccxtools"):
     geom_obj.Tool = cylinder2
     doc.recompute()
 
-    # line for load direction
-    sh_load_line = makeLine(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 10, 0))
-    load_line = doc.addObject("Part::Feature", "Load_direction_line")
-    load_line.Shape = sh_load_line
-
     if FreeCAD.GuiUp:
-        load_line.ViewObject.LineWidth = 5.0
-        load_line.ViewObject.LineColor = (1.0, 0.0, 0.0)
         geom_obj.ViewObject.Document.activeView().viewAxonometric()
         geom_obj.ViewObject.Document.activeView().fitAll()
-
-    doc.recompute()
 
     # analysis
     analysis = ObjectsFem.makeAnalysis(doc, "Analysis")

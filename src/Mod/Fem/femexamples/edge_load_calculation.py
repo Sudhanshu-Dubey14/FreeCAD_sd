@@ -70,7 +70,6 @@ def setup(doc=None, solvertype="ccxtools"):
     shape = wire.extrude(Vector(0, 0, 1000))
     geom_obj = doc.addObject('Part::Feature', 'SquareTube')
     geom_obj.Shape = shape
-
     doc.recompute()
 
     if FreeCAD.GuiUp:
@@ -177,4 +176,5 @@ def setup(doc=None, solvertype="ccxtools"):
     femmesh_obj.Part = geom_obj
     femmesh_obj.SecondOrderLinear = False
 
+    doc.recompute()
     return doc

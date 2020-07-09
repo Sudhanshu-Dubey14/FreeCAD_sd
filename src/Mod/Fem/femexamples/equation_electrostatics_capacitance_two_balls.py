@@ -82,7 +82,6 @@ def setup(doc=None, solvertype="elmer"):
     geom_obj = doc.addObject("Part::Cut", "Cut")
     geom_obj.Base = large_sphere
     geom_obj.Tool = fusion
-
     doc.recompute()
 
     if FreeCAD.GuiUp:
@@ -169,4 +168,6 @@ def setup(doc=None, solvertype="elmer"):
     femmesh_obj.Part = geom_obj
     femmesh_obj.SecondOrderLinear = False
     """
+
+    doc.recompute()
     return doc

@@ -89,7 +89,6 @@ def setup(doc=None, solvertype="ccxtools"):
     geom_obj = doc.addObject("Part::Fuse", "Fusion")
     geom_obj.Base = cut
     geom_obj.Tool = mirror
-
     doc.recompute()
 
     if FreeCAD.GuiUp:
