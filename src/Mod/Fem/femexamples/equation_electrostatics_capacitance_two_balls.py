@@ -92,24 +92,17 @@ def setup(doc=None, solvertype="elmer"):
     analysis = ObjectsFem.makeAnalysis(doc, "Analysis")
 
     # solver
-    if solvertype == "calculix":
-        solver_object = analysis.addObject(
-            ObjectsFem.makeSolverCalculix(doc, "SolverCalculiX")
-        )[0]
-    elif solvertype == "ccxtools":
-        solver_object = analysis.addObject(
-            ObjectsFem.makeSolverCalculixCcxTools(doc, "CalculiXccxTools")
-        )[0]
-        solver_object.WorkingDir = u""
-    elif solvertype == "elmer":
+    if solvertype == "elmer":
         solver_object = analysis.addObject(ObjectsFem.makeSolverElmer(doc, "SolverElmer"))[0]
         eq_electrostatic = ObjectsFem.makeEquationElectrostatic(doc, solver_object)
         eq_electrostatic.CalculateCapacitanceMatrix = True
         eq_electrostatic.CalculateElectricEnergy = True
         eq_electrostatic.CalculateElectricField = True
-
-    elif solvertype == "z88":
-        analysis.addObject(ObjectsFem.makeSolverZ88(doc, "SolverZ88"))
+    else:
+        FreeCAD.Console.PrintWarning(
+            "Not known or not supported solver type: {}. "
+            "No solver object was created.\n".format(solvertype)
+        )
 
     # material
     material_object = analysis.addObject(
