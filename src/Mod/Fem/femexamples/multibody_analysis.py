@@ -92,17 +92,20 @@ def setup(doc=None, solvertype="ccxtools"):
     j.Mode = "CompSolid"
     j.Proxy.execute(j)
     j.purgeTouched()
-    geom_obj = doc.addObject('Part::Feature', 'CompSolid')
-    geom_obj.Shape = j.Shape.CompSolids[0]
-
+    doc.recompute()
     if FreeCAD.GuiUp:
         for obj in j.ViewObject.Proxy.claimChildren():
             obj.ViewObject.hide()
+
+    geom_obj = doc.addObject('Part::Feature', 'CompSolid')
+    geom_obj.Shape = j.Shape.CompSolids[0]
+    if FreeCAD.GuiUp:
         j.ViewObject.hide()
+    doc.recompute()
+
+    if FreeCAD.GuiUp:
         geom_obj.ViewObject.Document.activeView().viewAxonometric()
         geom_obj.ViewObject.Document.activeView().fitAll()
-
-    doc.recompute()
 
     # analysis
     analysis = ObjectsFem.makeAnalysis(doc, "Analysis")
@@ -201,4 +204,5 @@ def setup(doc=None, solvertype="ccxtools"):
     femmesh_obj.Part = geom_obj
     femmesh_obj.SecondOrderLinear = False
 
+    doc.recompute()
     return doc

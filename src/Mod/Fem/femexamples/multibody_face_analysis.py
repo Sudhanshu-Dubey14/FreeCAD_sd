@@ -80,21 +80,22 @@ def setup(doc=None, solvertype="ccxtools"):
     face_obj5.Width = 10
     face_obj5.Length = 20
     face_obj5.Placement.Base = (80, 0, 0)
+    doc.recompute()
 
     # make a Shell out of the facees, to be able to remesh with GUI
     geom_obj = doc.addObject("Part::MultiFuse", "Fusion")
     geom_obj.Shapes = [face_obj1, face_obj2, face_obj3, face_obj4, face_obj5]
-
     if FreeCAD.GuiUp:
         face_obj1.ViewObject.hide()
         face_obj2.ViewObject.hide()
         face_obj3.ViewObject.hide()
         face_obj4.ViewObject.hide()
         face_obj5.ViewObject.hide()
+    doc.recompute()
+
+    if FreeCAD.GuiUp:
         geom_obj.ViewObject.Document.activeView().viewAxonometric()
         geom_obj.ViewObject.Document.activeView().fitAll()
-
-    doc.recompute()
 
     # analysis
     analysis = ObjectsFem.makeAnalysis(doc, "Analysis")
@@ -207,4 +208,5 @@ def setup(doc=None, solvertype="ccxtools"):
     femmesh_obj.Part = geom_obj
     femmesh_obj.SecondOrderLinear = False
 
+    doc.recompute()
     return doc

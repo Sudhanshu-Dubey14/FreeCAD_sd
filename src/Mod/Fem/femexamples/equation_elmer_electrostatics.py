@@ -141,7 +141,6 @@ def setup(doc=None, solvertype="elmer"):
     pocket.Length = 1500.0
     pocket.Length2 = 100.0
     pocket.Reversed = 1
-
     doc.recompute()
 
     if FreeCAD.GuiUp:
@@ -219,4 +218,5 @@ def setup(doc=None, solvertype="elmer"):
     femmesh_obj.Part = geom_obj
     femmesh_obj.SecondOrderLinear = False
 
+    doc.recompute()
     return doc

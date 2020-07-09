@@ -82,7 +82,6 @@ def setup(doc=None, solvertype="elmer"):
     geom_obj = doc.addObject("Part::Cut", "Cut")
     geom_obj.Base = large_sphere
     geom_obj.Tool = fusion
-
     doc.recompute()
 
     if FreeCAD.GuiUp:
@@ -147,7 +146,7 @@ def setup(doc=None, solvertype="elmer"):
     constraint_elect_pot1.CapacitanceBody = 2
     constraint_elect_pot1.CapacitanceBodyEnabled = True
 
-    # constant vaccum permittivity
+    # constant vacuum permittivity
     const_vaccum_permittivity = analysis.addObject(
         ObjectsFem.makeConstantVacuumPermittivity(doc))[0]
     const_vaccum_permittivity.VacuumPermittivity = '1 F/m'
@@ -169,4 +168,6 @@ def setup(doc=None, solvertype="elmer"):
     femmesh_obj.Part = geom_obj
     femmesh_obj.SecondOrderLinear = False
     """
+
+    doc.recompute()
     return doc
