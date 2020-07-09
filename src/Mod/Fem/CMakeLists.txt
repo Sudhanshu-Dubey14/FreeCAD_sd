@@ -56,6 +56,7 @@ SET(FemExamples_SRCS
     femexamples/constraint_transform_torque.py
     femexamples/edge_load_calculation.py
     femexamples/examplesgui.py
+    femexamples/equation_electrostatics_capacitance_two_balls.py
     femexamples/equation_elmer_electrostatics.py
     femexamples/manager.py
     femexamples/material_multiple_twoboxes.py
