@@ -146,7 +146,7 @@ def setup(doc=None, solvertype="elmer"):
     constraint_elect_pot1.CapacitanceBody = 2
     constraint_elect_pot1.CapacitanceBodyEnabled = True
 
-    # constant vaccum permittivity
+    # constant vacuum permittivity
     const_vaccum_permittivity = analysis.addObject(
         ObjectsFem.makeConstantVacuumPermittivity(doc))[0]
     const_vaccum_permittivity.VacuumPermittivity = '1 F/m'
