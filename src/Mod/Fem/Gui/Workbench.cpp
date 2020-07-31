@@ -160,6 +160,7 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
         << "FEM_MeshNetgenFromShape";
 #endif
      *mesh
+        << "FEM_Mesh"
         << "FEM_MeshGmshFromShape"
         << "Separator"
         << "FEM_MeshBoundaryLayer"
@@ -171,9 +172,7 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
      Gui::ToolBarItem* solve = new Gui::ToolBarItem(root);
      solve->setCommand("Solve");
      *solve
-        << "FEM_SolverCalculixCxxtools"
-        << "FEM_SolverCalculiX"
-        << "FEM_SolverElmer"
+        << "FEM_Solver"
         << "Separator"
         << "FEM_EquationElasticity"
         << "FEM_EquationElectrostatic"

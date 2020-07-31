@@ -37,6 +37,7 @@ SET(FemBaseModules_SRCS
 SET(FemCommands_SRCS
     femcommands/__init__.py
     femcommands/commands.py
+    femcommands/groupcommands.py
     femcommands/manager.py
 )
 

@@ -72,10 +72,12 @@ class FemWorkbench(Workbench):
         import Fem
         import FemGui
         import femcommands.commands
+        import femcommands.groupcommands
         # dummy usage to get flake8 and lgtm quiet
         False if Fem.__name__ else True
         False if FemGui.__name__ else True
         False if femcommands.commands.__name__ else True
+        False if femcommands.groupcommands.__name__ else True
 
     def GetClassName(self):
         # see https://forum.freecadweb.org/viewtopic.php?f=10&t=43300
